@@ -29,9 +29,9 @@ export default function Footer() {
           <Image
             src="/logo.png"
             alt={site.name}
-            width={180}
-            height={48}
-            className="mb-4 h-12 w-auto brightness-0 invert"
+            width={216}
+            height={90}
+            className="mb-4 h-14 w-auto rounded-lg bg-white p-2"
           />
           <p className="font-display text-lg font-semibold text-white">{site.tagline}</p>
           <p className="mt-3 text-sm leading-relaxed">
