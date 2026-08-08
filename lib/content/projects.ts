@@ -23,19 +23,77 @@ export interface Project {
   dateCompleted: string; // ISO date
 }
 
+// PLACEHOLDER ENTRIES — these point at neutral placeholder tiles in
+// public/installations/. To use your real photos, overwrite installation-0N.jpg
+// with the same filename (JPG/WebP, landscape 4:3) and edit the matching entry
+// below (title, location, category, systemSizeKw, alt, shortDescription).
 export const projects: Project[] = [
-  // === PLACEHOLDER — replace with real projects, one block per photo ===
-  // {
-  //   slug: "rooftop-solar-vandiyur-3kw",
-  //   title: "3 kW Rooftop Solar, Vandiyur",
-  //   location: "Vandiyur, Madurai",
-  //   category: "Residential",
-  //   systemSizeKw: 3,
-  //   image: "/installations/rooftop-solar-madurai-home-01.jpg",
-  //   alt: "3 kW rooftop solar installation on a home in Vandiyur, Madurai",
-  //   shortDescription: "On-grid rooftop system with TANGEDCO net metering.",
-  //   dateCompleted: "2026-07-01",
-  // },
+  {
+    slug: "sample-01",
+    title: "Rooftop Solar Installation",
+    location: "Madurai, Tamil Nadu",
+    category: "Residential",
+    systemSizeKw: 3,
+    image: "/installations/installation-01.jpg",
+    alt: "Rooftop solar installation on a home in Madurai",
+    shortDescription: "Sample project — replace with real details.",
+    dateCompleted: "2026-01-01",
+  },
+  {
+    slug: "sample-02",
+    title: "Rooftop Solar Installation",
+    location: "Madurai, Tamil Nadu",
+    category: "Residential",
+    systemSizeKw: 5,
+    image: "/installations/installation-02.jpg",
+    alt: "5 kW rooftop solar installation on a home in Tamil Nadu",
+    shortDescription: "Sample project — replace with real details.",
+    dateCompleted: "2026-01-01",
+  },
+  {
+    slug: "sample-03",
+    title: "Commercial Solar Installation",
+    location: "Madurai, Tamil Nadu",
+    category: "Commercial",
+    systemSizeKw: 10,
+    image: "/installations/installation-03.jpg",
+    alt: "Commercial rooftop solar installation on a building in Tamil Nadu",
+    shortDescription: "Sample project — replace with real details.",
+    dateCompleted: "2026-01-01",
+  },
+  {
+    slug: "sample-04",
+    title: "Commercial Solar Installation",
+    location: "Tamil Nadu",
+    category: "Commercial",
+    systemSizeKw: 20,
+    image: "/installations/installation-04.jpg",
+    alt: "Ground-mount commercial solar installation in Tamil Nadu",
+    shortDescription: "Sample project — replace with real details.",
+    dateCompleted: "2026-01-01",
+  },
+  {
+    slug: "sample-05",
+    title: "Agricultural Solar Water Pump",
+    location: "Tamil Nadu",
+    category: "Agricultural",
+    systemSizeKw: 5,
+    image: "/installations/installation-05.jpg",
+    alt: "Solar water pump installation on a farm in Tamil Nadu",
+    shortDescription: "Sample project — replace with real details.",
+    dateCompleted: "2026-01-01",
+  },
+  {
+    slug: "sample-06",
+    title: "Agricultural Solar Installation",
+    location: "Tamil Nadu",
+    category: "Agricultural",
+    systemSizeKw: 7,
+    image: "/installations/installation-06.jpg",
+    alt: "Agricultural solar installation powering a farm in Tamil Nadu",
+    shortDescription: "Sample project — replace with real details.",
+    dateCompleted: "2026-01-01",
+  },
 ];
 
 /** Lightweight source for image-only galleries (Contact landing page). */

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Phone, MessageCircle, Mail, Clock, MapPin, BadgeCheck } from "lucide-react";
 
 import LazyMap from "@/components/LazyMap";
@@ -54,14 +55,16 @@ export default function ContactLandingPage() {
       {/* 1. Top call bar — logo is a plain image (no click-through), phone prominent */}
       <header className="sticky top-0 z-40 border-b border-black/5 bg-white">
         <div className="mx-auto flex max-w-container items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
-          <Image
-            src="/logo.png"
-            alt={site.name}
-            width={216}
-            height={90}
-            priority
-            className="h-9 w-auto sm:h-11"
-          />
+          <Link href="/" aria-label="Quadbiz Solar Solutions — home" className="flex items-center">
+            <Image
+              src="/logo.png"
+              alt={site.name}
+              width={216}
+              height={90}
+              priority
+              className="h-9 w-auto sm:h-11"
+            />
+          </Link>
           <div className="flex items-center gap-2">
             <a href={telHref} className="hidden font-display text-lg font-bold text-navy sm:block">
               {site.phonePrimaryDisplay}
