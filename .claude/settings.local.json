@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --use-npm --no-turbopack --yes)",
+      "Bash(node /private/tmp/claude-501/-Users-joemark-Quadbiz-Website/1548e297-3f06-451c-9ac4-869ec0f4af6f/scratchpad/gen-assets.mjs /Users/joemark/Quadbiz-Website)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"next-server\")",
+      "Bash(npm ls *)",
+      "Bash(node -e \"const l=require\\('lucide-react'\\); console.log\\('exports sample:', Object.keys\\(l\\).slice\\(0,5\\).join\\(', '\\)\\)\")"
+    ]
+  }
+}

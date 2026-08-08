@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------------------------------------------------------------------------
+   Brand tokens — mirror of tailwind.config.ts so non-Tailwind contexts can
+   reference the same values via var(--brand-*).
+   ------------------------------------------------------------------------- */
+:root {
+  --brand-navy: #21395c;
+  --brand-orange: #ff6b35;
+  --brand-amber: #f7931e;
+  --brand-green: #6ba542;
+  --brand-ink: #1a1a1a;
+  --brand-grey: #5b6472;
+  --brand-bg-soft: #f5f7fa;
+  --brand-white: #ffffff;
+
+  --cta-gradient: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+
+  /* next/font injects these; fall back to system fonts if unavailable. */
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--brand-white);
+    color: var(--brand-ink);
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--brand-navy);
+    text-wrap: balance;
+  }
+
+  /* Visible, consistent keyboard focus everywhere. */
+  :focus-visible {
+    outline: 3px solid var(--brand-amber);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Only show focus rings for keyboard users, not mouse clicks. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background-color: rgba(255, 107, 53, 0.2);
+    color: var(--brand-navy);
+  }
+}
+
+@layer components {
+  /* Primary CTA — orange→amber gradient. */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-sans font-semibold text-white shadow-card transition-all duration-200;
+    background-image: var(--cta-gradient);
+  }
+  .btn-primary:hover {
+    @apply shadow-card-hover;
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+  }
+
+  /* Secondary — navy outline. */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-navy px-6 py-3 font-sans font-semibold text-navy transition-all duration-200;
+  }
+  .btn-secondary:hover {
+    @apply bg-navy text-white;
+  }
+
+  /* Eco / secondary accent link. */
+  .link-eco {
+    @apply font-semibold text-green underline-offset-4 hover:underline;
+  }
+}
+
+/* Skip-to-content link — visible only when focused. */
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: -3rem;
+  z-index: 100;
+  border-radius: 0.5rem;
+  background: var(--brand-navy);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+/* -------------------------------------------------------------------------
+   Respect users who prefer reduced motion — disable the hero glow animation
+   and any transitions/animations.
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
