@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, type FormEvent } from "react";
 
 import { site, whatsappUrl } from "@/lib/site";
@@ -287,7 +288,11 @@ export default function LeadForm({
       </button>
 
       <p className="mt-3 text-center text-xs text-grey">
-        We&rsquo;ll only use your details to prepare your quote. No spam.
+        By submitting this form, you agree to our{" "}
+        <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-navy">
+          Privacy Policy
+        </Link>{" "}
+        and consent to being contacted about your enquiry.
       </p>
     </form>
   );

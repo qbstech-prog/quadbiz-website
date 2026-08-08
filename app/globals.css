@@ -89,6 +89,26 @@
   .link-eco {
     @apply font-semibold text-green underline-offset-4 hover:underline;
   }
+
+  /* Readable long-form prose for legal / policy pages. */
+  .legal {
+    @apply text-ink;
+  }
+  .legal h2 {
+    @apply mt-10 text-h3 font-semibold;
+  }
+  .legal p {
+    @apply mt-4 leading-body text-grey;
+  }
+  .legal ul {
+    @apply mt-4 list-disc space-y-2 pl-6 leading-body text-grey;
+  }
+  .legal a {
+    @apply font-medium text-green underline underline-offset-4;
+  }
+  .legal strong {
+    @apply font-semibold text-ink;
+  }
 }
 
 /* Skip-to-content link — visible only when focused. */

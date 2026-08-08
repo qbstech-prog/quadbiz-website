@@ -135,9 +135,19 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/10">
-        <div className="mx-auto max-w-container px-4 py-5 text-center text-xs text-white/60 sm:px-6 lg:px-8">
-          © {site.foundingDate} {site.name}. All rights reserved. · MNRE Registered · Serving all of
-          Tamil Nadu
+        <div className="mx-auto flex max-w-container flex-col items-center gap-3 px-4 py-5 text-center text-xs text-white/60 sm:px-6 md:flex-row md:justify-between md:text-left lg:px-8">
+          <p>
+            © {site.foundingDate} {site.name}. All rights reserved. · MNRE Registered · Serving all
+            of Tamil Nadu
+          </p>
+          <nav aria-label="Legal" className="flex items-center gap-4">
+            <Link href="/privacy-policy" className="transition-colors hover:text-amber">
+              Privacy Policy
+            </Link>
+            <Link href="/terms-of-service" className="transition-colors hover:text-amber">
+              Terms of Service
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>
