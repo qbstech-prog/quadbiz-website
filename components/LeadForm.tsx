@@ -5,18 +5,19 @@ import { useState, type FormEvent } from "react";
 import { site, whatsappUrl } from "@/lib/site";
 
 /** Property type options — values double as the select value and label. */
-const PROPERTY_TYPES = ["Home", "Commercial", "Agricultural"] as const;
-type PropertyType = (typeof PROPERTY_TYPES)[number];
+export const PROPERTY_TYPES = ["Home", "Commercial", "Agricultural"] as const;
+export type PropertyType = (typeof PROPERTY_TYPES)[number];
 
-/** Average monthly electricity-bill bands. */
-const BILL_BANDS = [
+/** Average monthly electricity-bill bands. Exported so other components
+ *  (e.g. the subsidy calculator) can hand off a valid bucket. */
+export const BILL_BANDS = [
   "<₹1,500",
   "₹1,500–3,000",
   "₹3,000–6,000",
   "₹6,000–15,000",
   "₹15,000+",
 ] as const;
-type BillBand = (typeof BILL_BANDS)[number];
+export type BillBand = (typeof BILL_BANDS)[number];
 
 export interface LeadFormProps {
   /** Prefill the property type (e.g. handed off from the subsidy calculator). */
