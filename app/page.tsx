@@ -16,6 +16,7 @@ import {
 
 import LeadForm from "@/components/LeadForm";
 import Section from "@/components/Section";
+import StatsStrip from "@/components/StatsStrip";
 import TrustBar from "@/components/TrustBar";
 import Reviews from "@/components/home/Reviews";
 import { SITE_URL, absoluteUrl, site, whatsappUrl } from "@/lib/site";
@@ -57,13 +58,6 @@ const whyChoose = [
     title: "Local Service",
     body: "A Madurai team that answers the phone and shows up. Fast support, always nearby.",
   },
-];
-
-const stats = [
-  { value: "15+", label: "Installations" },
-  { value: "50 kW+", label: "Installed" },
-  { value: "5+", label: "Years of Team Experience" },
-  { value: "100%", label: "MNRE Compliant" },
 ];
 
 const services = [
@@ -186,19 +180,7 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- */}
       {/* Section 3 — Stats strip */}
       {/* ---------------------------------------------------------------- */}
-      <Section variant="navy">
-        <dl className="grid grid-cols-2 gap-8 text-center lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col-reverse">
-              {/* dt precedes dd in the DOM; flex-col-reverse shows the number on top. */}
-              <dt className="mt-1 text-sm text-white/80">{stat.label}</dt>
-              <dd className="font-display text-4xl font-bold text-amber md:text-5xl">
-                {stat.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </Section>
+      <StatsStrip />
 
       {/* ---------------------------------------------------------------- */}
       {/* Section 4 — Services overview */}
