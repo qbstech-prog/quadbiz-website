@@ -8,6 +8,7 @@ const quickLinks = [
   { label: "About", href: "/about" },
   { label: "Projects", href: "/projects" },
   { label: "PM Surya Ghar Subsidy", href: "/pm-surya-ghar-subsidy" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
 

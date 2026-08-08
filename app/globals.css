@@ -109,6 +109,38 @@
   .legal strong {
     @apply font-semibold text-ink;
   }
+
+  /* Rendered MDX article body. */
+  .prose {
+    @apply text-ink;
+  }
+  .prose > p:first-child {
+    @apply mt-0;
+  }
+  .prose h2 {
+    @apply mt-10 text-h3 font-semibold;
+  }
+  .prose h3 {
+    @apply mt-8 text-lg font-semibold text-navy;
+  }
+  .prose p {
+    @apply mt-4 leading-body text-grey;
+  }
+  .prose ul {
+    @apply mt-4 list-disc space-y-2 pl-6 leading-body text-grey;
+  }
+  .prose ol {
+    @apply mt-4 list-decimal space-y-2 pl-6 leading-body text-grey;
+  }
+  .prose a {
+    @apply font-medium text-green underline underline-offset-4;
+  }
+  .prose strong {
+    @apply font-semibold text-ink;
+  }
+  .prose blockquote {
+    @apply mt-6 border-l-4 border-orange/40 pl-4 italic text-grey;
+  }
 }
 
 /* Skip-to-content link — visible only when focused. */
