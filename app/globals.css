@@ -19,8 +19,8 @@
   --cta-gradient: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
 
   /* next/font injects these; fall back to system fonts if unavailable. */
-  --font-display: "Space Grotesk", system-ui, sans-serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
 }
 
 @layer base {
@@ -32,7 +32,7 @@
   body {
     background-color: var(--brand-white);
     color: var(--brand-ink);
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
     line-height: 1.7;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -40,10 +40,10 @@
 
   h1,
   h2,
-  h3,
-  h4 {
+  h3 {
     font-family: var(--font-display);
     color: var(--brand-navy);
+    letter-spacing: -0.02em;
     text-wrap: balance;
   }
 

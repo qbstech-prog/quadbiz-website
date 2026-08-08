@@ -25,13 +25,13 @@ const config: Config = {
       },
       fontFamily: {
         display: ["var(--font-display)", "system-ui", "sans-serif"],
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        sans: ["var(--font-body)", "system-ui", "sans-serif"],
       },
       fontSize: {
-        // Fluid display scale — tight tracking applied via utilities where used.
+        // Fluid display scale — headings share -0.02em tracking.
         h1: ["clamp(2.25rem, 1.6rem + 2.8vw, 3.25rem)", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
-        h2: ["clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem)", { lineHeight: "1.2", letterSpacing: "-0.01em" }],
-        h3: ["clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem)", { lineHeight: "1.3" }],
+        h2: ["clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem)", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
+        h3: ["clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem)", { lineHeight: "1.3", letterSpacing: "-0.02em" }],
       },
       lineHeight: {
         body: "1.7",

@@ -9,7 +9,10 @@
       "Bash(pkill -f \"next dev\")",
       "Bash(pkill -f \"next-server\")",
       "Bash(npm ls *)",
-      "Bash(node -e \"const l=require\\('lucide-react'\\); console.log\\('exports sample:', Object.keys\\(l\\).slice\\(0,5\\).join\\(', '\\)\\)\")"
+      "Bash(node -e \"const l=require\\('lucide-react'\\); console.log\\('exports sample:', Object.keys\\(l\\).slice\\(0,5\\).join\\(', '\\)\\)\")",
+      "Bash(git add *)",
+      "Bash(git commit -q -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }

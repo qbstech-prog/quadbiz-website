@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Bricolage_Grotesque, Inter } from "next/font/google";
 
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
@@ -9,18 +9,22 @@ import { SITE_URL, site } from "@/lib/site";
 
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+// Display/headings — Bricolage Grotesque, only the weights we use.
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   weight: ["600", "700"],
   variable: "--font-display",
   display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });
 
+// Body/UI — Inter.
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  variable: "--font-sans",
+  variable: "--font-body",
   display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -71,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-IN" className={`${spaceGrotesk.variable} ${inter.variable}`}>
+    <html lang="en-IN" className={`${bricolage.variable} ${inter.variable}`}>
       <body>
         {/* Site-wide LocalBusiness structured data. */}
         <script
