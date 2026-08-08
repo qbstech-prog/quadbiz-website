@@ -49,7 +49,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
             <div className="relative aspect-[4/3] w-full bg-bg-soft">
               <Image
                 src={project.image}
-                alt={`${project.title} — ${project.location}`}
+                alt={project.alt}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover"

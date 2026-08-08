@@ -1,3 +1,6 @@
+// To add a project: add a block to lib/content/projects.ts and drop the
+// matching image in public/installations/. The grid and the Contact landing
+// page gallery both read from that single source.
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Home as HomeIcon, Building2, Sprout } from "lucide-react";

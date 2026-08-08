@@ -1,13 +1,22 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Phone, MessageCircle, Mail, Clock, MapPin, BadgeCheck } from "lucide-react";
 
 import LazyMap from "@/components/LazyMap";
 import LeadForm from "@/components/LeadForm";
 import Section from "@/components/Section";
+import Reviews from "@/components/home/Reviews";
 import { breadcrumbSchema } from "@/lib/schema";
 import { SITE_URL, absoluteUrl, site, telHref, whatsappUrl } from "@/lib/site";
+import { installationImages } from "@/lib/content/projects";
 
 const PATH = "/contact";
+
+const fullAddress = `${site.address.street}, ${site.address.locality}, ${site.address.region} ${site.address.postalCode}`;
+const mapQuery = encodeURIComponent(`${site.name}, ${fullAddress}`);
+// TODO: replace with the exact Google Place embed URL once available.
+const mapSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
 
 export const metadata: Metadata = {
   title: "Contact Quadbiz Solar | Free Solar Quote in Madurai",
@@ -16,15 +25,7 @@ export const metadata: Metadata = {
   alternates: { canonical: PATH },
 };
 
-// Full address string (matches lib/site.ts NAP) used for display + map query.
-const fullAddress = `${site.address.street}, ${site.address.locality}, ${site.address.region} ${site.address.postalCode}`;
-const mapQuery = encodeURIComponent(`${site.name}, ${fullAddress}`);
-// TODO: replace with the exact Google Place embed URL once available.
-// For now this uses an address query (no fabricated coordinates, no API key).
-const mapSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
-const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
-
-export default function ContactPage() {
+export default function ContactLandingPage() {
   const jsonLd = [
     {
       "@context": "https://schema.org",
@@ -50,35 +51,91 @@ export default function ContactPage() {
         />
       ))}
 
-      {/* Section 1 — Hero (compact) */}
+      {/* 1. Top call bar — logo is a plain image (no click-through), phone prominent */}
+      <header className="sticky top-0 z-40 border-b border-black/5 bg-white">
+        <div className="mx-auto flex max-w-container items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+          <Image
+            src="/logo.png"
+            alt={site.name}
+            width={216}
+            height={90}
+            priority
+            className="h-9 w-auto sm:h-11"
+          />
+          <div className="flex items-center gap-2">
+            <a href={telHref} className="hidden font-display text-lg font-bold text-navy sm:block">
+              {site.phonePrimaryDisplay}
+            </a>
+            <a
+              href={telHref}
+              className="btn-primary px-4 py-2.5 text-sm"
+              aria-label={`Call ${site.phonePrimaryDisplay}`}
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Call Now
+            </a>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary hidden px-4 py-2.5 text-sm sm:inline-flex"
+            >
+              <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </header>
+
+      {/* 2 + 3. Headline + lead form, high on the page */}
       <section className="bg-bg-soft">
-        <div className="mx-auto max-w-container px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-orange">Contact</p>
-            <h1 className="mt-4 text-h1 font-bold text-navy">Get Your Free Solar Quote</h1>
-            <p className="mt-5 text-lg leading-body text-grey">
-              Tell us about your property and we&rsquo;ll call you within 24 hours. Prefer to talk
-              now? Call or WhatsApp us directly.
+        <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 md:py-14 lg:px-8">
+          <div className="mb-8 text-center">
+            <h1 className="text-h1 font-bold text-navy">Get Your Free Solar Quote</h1>
+            <p className="mt-4 text-lg leading-body text-grey">
+              Tell us about your property and we&rsquo;ll call you within 24 hours.
             </p>
           </div>
+          <LeadForm source="contact-landing" />
         </div>
       </section>
 
-      {/* Section 2 — Two-column: form + contact details */}
-      <Section id="quote">
-        <div className="grid gap-10 lg:grid-cols-2">
-          {/* Left — lead form (stacks on top on mobile) */}
-          <div>
-            <h2 className="mb-6 text-h3 font-semibold text-navy">Request a callback</h2>
-            <LeadForm source="contact-page" />
+      {/* 4. Installation gallery — hidden while there are no real photos */}
+      {installationImages.length > 0 && (
+        <Section>
+          <div className="mb-10 text-center">
+            <h2 className="text-h2 font-bold">Our Recent Installations</h2>
           </div>
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {installationImages.map((img) => (
+              <li
+                key={img.src}
+                className="relative aspect-[4/3] overflow-hidden rounded-card bg-bg-soft"
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover"
+                  loading="lazy"
+                />
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
 
-          {/* Right — contact details */}
+      {/* 5. Reviews — reused server component; hidden until Google Places is wired */}
+      <Reviews />
+
+      {/* 6. Contact details + map (information, not navigation) */}
+      <Section variant="soft">
+        <div className="grid gap-10 lg:grid-cols-2">
           <div>
             <h2 className="mb-6 text-h3 font-semibold text-navy">Contact details</h2>
             <div className="rounded-card border border-black/5 bg-white p-6 shadow-card sm:p-8">
               <p className="font-display text-lg font-bold text-navy">{site.name}</p>
-
               <ul className="mt-5 space-y-4 text-ink">
                 <li className="flex items-start gap-3">
                   <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange" aria-hidden="true" />
@@ -96,10 +153,7 @@ export default function ContactPage() {
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <MessageCircle
-                    className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange"
-                    aria-hidden="true"
-                  />
+                  <MessageCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange" aria-hidden="true" />
                   <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-orange">
                     WhatsApp: {site.phonePrimaryDisplay}
                   </a>
@@ -119,13 +173,10 @@ export default function ContactPage() {
                   <span>All of Tamil Nadu · HQ Madurai</span>
                 </li>
               </ul>
-
               <span className="mt-6 inline-flex items-center gap-2 rounded-full border border-green/40 bg-green/10 px-3 py-1 text-xs font-semibold text-navy">
                 <BadgeCheck className="h-4 w-4 text-green" aria-hidden="true" />
                 MNRE Registered
               </span>
-
-              {/* Quick-action buttons */}
               <div className="mt-6 flex flex-wrap gap-3">
                 <a href={telHref} className="btn-primary">
                   <Phone className="h-4 w-4" aria-hidden="true" />
@@ -138,18 +189,17 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
-        </div>
-      </Section>
 
-      {/* Section 3 — Map */}
-      <Section variant="soft">
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-          <h2 className="text-h2 font-bold">Find Us in Madurai</h2>
-          <a href={directionsUrl} target="_blank" rel="noopener noreferrer" className="link-eco">
-            Get directions →
-          </a>
+          <div>
+            <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+              <h2 className="text-h3 font-semibold text-navy">Find Us in Madurai</h2>
+              <a href={directionsUrl} target="_blank" rel="noopener noreferrer" className="link-eco">
+                Get directions →
+              </a>
+            </div>
+            <LazyMap src={mapSrc} title="Quadbiz Solar Solutions location, Madurai" />
+          </div>
         </div>
-        <LazyMap src={mapSrc} title="Quadbiz Solar Solutions location, Madurai" />
       </Section>
     </>
   );

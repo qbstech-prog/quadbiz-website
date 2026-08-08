@@ -22,7 +22,7 @@ import Reviews from "@/components/home/Reviews";
 import { SITE_URL, absoluteUrl, site, whatsappUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Solar Company in Madurai | Quadbiz Solar Solutions",
+  title: { absolute: "Solar Company in Madurai | Quadbiz Solar Solutions" },
   description:
     "MNRE-registered solar installer in Madurai. End-to-end rooftop, commercial & agricultural solar across Tamil Nadu. 25-yr panel warranty. Get a free quote.",
   alternates: { canonical: "/" },

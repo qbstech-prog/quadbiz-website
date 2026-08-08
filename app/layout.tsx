@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter } from "next/font/google";
 
-import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
-import Header from "@/components/Header";
 import { localBusinessSchema } from "@/lib/schema";
 import { SITE_URL, site } from "@/lib/site";
 
@@ -83,13 +81,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema()) }}
         />
 
-        <a href="#main-content" className="skip-link">
-          Skip to content
-        </a>
-
-        <Header />
-        <main id="main-content">{children}</main>
-        <Footer />
+        {/*
+          Header/Footer live in the (site) route-group layout so the (landing)
+          group (Contact) can be navigation-free. FloatingButtons stay global —
+          WhatsApp + call are conversion aids on every page.
+        */}
+        {children}
         <FloatingButtons />
       </body>
     </html>

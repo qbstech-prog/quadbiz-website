@@ -12,7 +12,8 @@
       "Bash(node -e \"const l=require\\('lucide-react'\\); console.log\\('exports sample:', Object.keys\\(l\\).slice\\(0,5\\).join\\(', '\\)\\)\")",
       "Bash(git add *)",
       "Bash(git commit -q -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git mv *)"
     ]
   }
 }
