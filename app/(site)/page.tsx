@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Handshake,
@@ -120,11 +121,33 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- */}
       {/* Section 1 — Hero */}
       {/* ---------------------------------------------------------------- */}
-      <section className="relative overflow-hidden bg-bg-soft">
-        {/* Signature sun-ray glow — the one bold place. Hidden for reduced motion? */}
-        {/* It's a static gradient (no animation), so it's safe to always render. */}
+      <section className="relative isolate flex min-h-[600px] items-center overflow-hidden bg-bg-soft md:min-h-[680px]">
+        {/* Full-bleed hero photo — this is the LCP element, so it loads eagerly
+            (priority) and is never lazy-loaded. next/image serves an optimized
+            AVIF/WebP; the original PNG stays in /public/hero as the source. */}
+        <Image
+          src="/hero/hero-solar-installation.png"
+          alt="Quadbiz solar panel installation on a rooftop in Madurai"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[50%_62%]"
+        />
+        {/* Readability scrim: strong white behind the centred text column, fading
+            to transparent at the edges so the photo still reads there. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(130% 95% at 50% 44%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.78) 42%, rgba(255,255,255,0.35) 78%, rgba(255,255,255,0) 100%)",
+          }}
+        />
+        {/* Slight overall veil — strengthened on mobile where text sits tighter. */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/30 sm:bg-white/15" />
+        {/* Signature sun-ray glow, layered above the photo for warmth (static). */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-sun-glow" />
-        <div className="relative mx-auto max-w-container px-4 py-16 text-center sm:px-6 md:py-24 lg:px-8">
+        <div className="relative z-10 mx-auto w-full max-w-container px-4 py-16 text-center sm:px-6 md:py-20 lg:px-8">
           <p className="text-sm font-semibold uppercase tracking-[0.15em] text-orange">
             MNRE Registered · Serving All of Tamil Nadu
           </p>
