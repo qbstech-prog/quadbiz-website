@@ -20,6 +20,7 @@ import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/motion/Reveal";
 import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
+import Timeline from "@/components/Timeline";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
 
 const PATH = "/services/commercial-solar";
@@ -187,18 +188,20 @@ export default function CommercialSolarPage() {
         <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Why Businesses Switch to Solar</h2>
         </Reveal>
-        <RevealGroup as="ul" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <RevealGroup as="ul" className="mx-auto flex max-w-5xl flex-wrap justify-center gap-6">
           {benefits.map((benefit) => (
             <RevealItem
               as="li"
               key={benefit.title}
-              className="rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
+              className="w-full rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
             >
-              <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-orange/10 text-orange">
-                <benefit.icon className="h-6 w-6" aria-hidden="true" />
-              </span>
-              <h3 className="text-lg font-semibold text-navy">{benefit.title}</h3>
-              <p className="mt-2 text-grey">{benefit.body}</p>
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-orange/10 text-orange">
+                  <benefit.icon className="h-6 w-6" aria-hidden="true" />
+                </span>
+                <h3 className="text-lg font-semibold text-navy">{benefit.title}</h3>
+              </div>
+              <p className="mt-3 text-grey">{benefit.body}</p>
             </RevealItem>
           ))}
         </RevealGroup>
@@ -206,26 +209,27 @@ export default function CommercialSolarPage() {
 
       {/* Section 4 — Turnkey process */}
       <Section>
-        <Reveal kind="blur" className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-12 text-center">
           <h2 className="text-h2 font-bold">Our Turnkey Process</h2>
         </Reveal>
-        <RevealGroup as="ol" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {process.map((step, index) => (
-            <RevealItem
-              as="li"
-              key={step.title}
-              className="relative rounded-card border border-black/5 bg-white p-6 shadow-soft"
-            >
-              <span className="font-display text-3xl font-bold text-orange/30">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span className="mt-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-navy/5 text-navy">
-                <step.icon className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <h3 className="mt-3 text-base font-semibold text-navy">{step.title}</h3>
-            </RevealItem>
-          ))}
-        </RevealGroup>
+        {/* Two connected timeline rows (01–04, 05–08) so 8 steps read as one
+            sequence. Desktop: two horizontal rows; mobile: vertical per row. */}
+        <div className="space-y-12 md:space-y-16">
+          <Timeline
+            startNumber={1}
+            steps={process.slice(0, 4).map((step) => ({
+              title: step.title,
+              icon: <step.icon className="h-4 w-4" aria-hidden="true" />,
+            }))}
+          />
+          <Timeline
+            startNumber={5}
+            steps={process.slice(4).map((step) => ({
+              title: step.title,
+              icon: <step.icon className="h-4 w-4" aria-hidden="true" />,
+            }))}
+          />
+        </div>
       </Section>
 
       {/* Section 5 — FAQ */}

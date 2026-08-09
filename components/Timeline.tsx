@@ -1,11 +1,12 @@
 "use client";
 
-import { type ComponentType, useEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 
 export interface TimelineStep {
   title: string;
-  body: string;
-  icon?: ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
+  body?: string;
+  /** Optional secondary icon (rendered element, kept subtle beside the title). */
+  icon?: ReactNode;
 }
 
 /**
@@ -13,8 +14,17 @@ export interface TimelineStep {
  * On scroll-in the connecting line "draws" and steps stagger in (CSS-driven via
  * the .timeline-in class + globals.css). Progressive-enhancement + reduced-motion
  * safe: without JS or with reduced motion, the full line and all steps show.
+ *
+ * `startNumber` offsets the step numbers (e.g. 5 → 05–08), so a longer process
+ * can be split across two stacked rows while numbering stays continuous.
  */
-export default function Timeline({ steps }: { steps: TimelineStep[] }) {
+export default function Timeline({
+  steps,
+  startNumber = 1,
+}: {
+  steps: TimelineStep[];
+  startNumber?: number;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
 
@@ -60,16 +70,14 @@ export default function Timeline({ steps }: { steps: TimelineStep[] }) {
             style={inView ? { transitionDelay: `${i * 120}ms` } : undefined}
           >
             <span className="relative z-10 flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border border-black/5 bg-white font-display text-xl font-bold text-orange shadow-soft">
-              {String(i + 1).padStart(2, "0")}
+              {String(startNumber + i).padStart(2, "0")}
             </span>
             <div className="md:mt-1">
-              <h3 className="flex items-center gap-2 text-lg font-semibold text-navy md:justify-center">
+              <h3 className="flex items-center gap-2 text-base font-semibold text-navy md:justify-center">
                 {step.title}
-                {step.icon ? (
-                  <step.icon className="h-4 w-4 text-navy/40" aria-hidden={true} />
-                ) : null}
+                {step.icon ? <span className="text-navy/40">{step.icon}</span> : null}
               </h3>
-              <p className="mt-1 text-grey">{step.body}</p>
+              {step.body ? <p className="mt-1 text-grey">{step.body}</p> : null}
             </div>
           </li>
         ))}
