@@ -14,6 +14,8 @@ import {
 
 import FAQ, { type FaqItem } from "@/components/FAQ";
 import LeadForm from "@/components/LeadForm";
+import Reveal from "@/components/motion/Reveal";
+import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
 import { formatINR, SUBSIDY_RATES } from "@/lib/subsidy";
@@ -162,53 +164,56 @@ export default function ResidentialSolarPage() {
 
       {/* Section 2 — System types */}
       <Section>
-        <div className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Choose the Right System for Your Home</h2>
-        </div>
-        <ul className="grid gap-6 md:grid-cols-3">
+        </Reveal>
+        <RevealGroup as="ul" className="grid gap-6 md:grid-cols-3">
           {systemTypes.map((type) => (
-            <li
+            <RevealItem
+              as="li"
               key={type.title}
-              className="rounded-card border border-black/5 bg-white p-6 shadow-card"
+              className="rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
             >
               <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-orange/10 text-orange">
                 <type.icon className="h-6 w-6" aria-hidden="true" />
               </span>
               <h3 className="text-lg font-semibold text-navy">{type.title}</h3>
               <p className="mt-2 text-grey">{type.body}</p>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
       </Section>
 
       {/* Section 3 — What's included */}
       <Section variant="soft">
-        <div className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Everything Handled Under One Roof</h2>
-        </div>
-        <ul className="mx-auto grid max-w-4xl gap-3 sm:grid-cols-2">
+        </Reveal>
+        <RevealGroup as="ul" className="mx-auto grid max-w-4xl gap-3 sm:grid-cols-2">
           {included.map((item) => (
-            <li
+            <RevealItem
+              as="li"
               key={item}
-              className="flex items-start gap-3 rounded-card border border-black/5 bg-white p-4 shadow-card"
+              className="flex items-start gap-3 rounded-card border border-black/5 bg-white p-4 shadow-soft"
             >
               <Check className="mt-0.5 h-5 w-5 flex-shrink-0 text-green" aria-hidden="true" />
               <span className="text-ink">{item}</span>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
       </Section>
 
       {/* Section 4 — Benefits */}
       <Section>
-        <div className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Why Homeowners Go Solar</h2>
-        </div>
-        <ul className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        </Reveal>
+        <RevealGroup as="ul" className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map((benefit) => (
-            <li
+            <RevealItem
+              as="li"
               key={benefit.text}
-              className="flex items-center gap-3 rounded-card border border-black/5 bg-white p-5 shadow-card"
+              className="flex items-center gap-3 rounded-card border border-black/5 bg-white p-5 shadow-soft"
             >
               <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-green/10 text-green">
                 <benefit.icon className="h-5 w-5" aria-hidden="true" />
@@ -222,16 +227,16 @@ export default function ResidentialSolarPage() {
                   benefit.text
                 )}
               </span>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
       </Section>
 
       {/* Section 5 — Sizing guide */}
       <Section variant="soft">
-        <div className="mb-8 text-center">
+        <Reveal kind="blur" className="mb-8 text-center">
           <h2 className="text-h2 font-bold">What Size System Do You Need?</h2>
-        </div>
+        </Reveal>
         <div className="mx-auto max-w-3xl overflow-x-auto">
           <table className="w-full border-collapse overflow-hidden rounded-card border border-black/10 text-left">
             <thead>
@@ -270,21 +275,21 @@ export default function ResidentialSolarPage() {
 
       {/* Section 6 — FAQ */}
       <Section>
-        <div className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Rooftop Solar — Frequently Asked Questions</h2>
-        </div>
+        </Reveal>
         <FAQ items={faqs} />
       </Section>
 
       {/* Section 7 — Lead form */}
       <Section id="quote" variant="soft">
         <div className="mx-auto max-w-2xl">
-          <div className="mb-8 text-center">
+          <Reveal className="mb-8 text-center">
             <h2 className="text-h2 font-bold">Get Your Free Rooftop Solar Quote</h2>
             <p className="mt-3 text-grey">
               Tell us about your home and we&rsquo;ll call you within 24 hours.
             </p>
-          </div>
+          </Reveal>
           <LeadForm source="residential-page" defaultPropertyType="Home" />
         </div>
       </Section>

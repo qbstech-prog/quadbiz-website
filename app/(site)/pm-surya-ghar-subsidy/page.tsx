@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 
 import FAQ, { type FaqItem } from "@/components/FAQ";
+import Reveal from "@/components/motion/Reveal";
+import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
 import SubsidyLeadFlow from "@/components/SubsidyLeadFlow";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
@@ -130,9 +132,9 @@ export default function SubsidyPage() {
 
       {/* Section 2 — Subsidy structure */}
       <Section>
-        <div className="mb-8 text-center">
+        <Reveal kind="blur" className="mb-8 text-center">
           <h2 className="text-h2 font-bold">How Much Subsidy Can You Get?</h2>
-        </div>
+        </Reveal>
         <div className="mx-auto max-w-2xl overflow-x-auto">
           <table className="w-full border-collapse overflow-hidden rounded-card border border-black/10 text-left">
             <thead>
@@ -169,32 +171,34 @@ export default function SubsidyPage() {
       <SubsidyLeadFlow>
         {/* Section 4 — Eligibility */}
         <Section>
-          <div className="mb-8 text-center">
+          <Reveal kind="blur" className="mb-8 text-center">
             <h2 className="text-h2 font-bold">Who Is Eligible?</h2>
-          </div>
-          <ul className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
+          </Reveal>
+          <RevealGroup as="ul" className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
             {eligibility.map((item) => (
-              <li
+              <RevealItem
+                as="li"
                 key={item}
-                className="flex items-start gap-3 rounded-card border border-black/5 bg-white p-4 shadow-card"
+                className="flex items-start gap-3 rounded-card border border-black/5 bg-white p-4 shadow-soft"
               >
                 <BadgeCheck className="mt-0.5 h-5 w-5 flex-shrink-0 text-green" aria-hidden="true" />
                 <span className="text-ink">{item}</span>
-              </li>
+              </RevealItem>
             ))}
-          </ul>
+          </RevealGroup>
         </Section>
 
         {/* Section 5 — How Quadbiz handles it */}
         <Section variant="soft">
-          <div className="mb-10 text-center">
+          <Reveal kind="blur" className="mb-10 text-center">
             <h2 className="text-h2 font-bold">We Manage the Whole Process</h2>
-          </div>
-          <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          </Reveal>
+          <RevealGroup as="ol" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {process.map((step, index) => (
-              <li
+              <RevealItem
+                as="li"
                 key={step.title}
-                className="relative rounded-card border border-black/5 bg-white p-6 shadow-card"
+                className="relative rounded-card border border-black/5 bg-white p-6 shadow-soft"
               >
                 <span className="font-display text-3xl font-bold text-orange/30">
                   {String(index + 1).padStart(2, "0")}
@@ -203,16 +207,16 @@ export default function SubsidyPage() {
                   <step.icon className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <h3 className="mt-3 text-lg font-semibold text-navy">{step.title}</h3>
-              </li>
+              </RevealItem>
             ))}
-          </ol>
+          </RevealGroup>
         </Section>
 
         {/* Section 6 — FAQ */}
         <Section>
-          <div className="mb-10 text-center">
+          <Reveal kind="blur" className="mb-10 text-center">
             <h2 className="text-h2 font-bold">PM Surya Ghar — Frequently Asked Questions</h2>
-          </div>
+          </Reveal>
           <FAQ items={faqs} />
         </Section>
       </SubsidyLeadFlow>

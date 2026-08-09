@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
 
 import MdxLink from "@/components/mdx/MdxLink";
+import Reveal from "@/components/motion/Reveal";
 import PostCTA from "@/components/PostCTA";
 import Section from "@/components/Section";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -129,7 +130,9 @@ export default async function BlogPostPage({ params }: PageProps) {
 
           <article className="prose">{content}</article>
 
-          <PostCTA />
+          <Reveal kind="confident">
+            <PostCTA />
+          </Reveal>
         </div>
       </Section>
     </>

@@ -5,6 +5,8 @@ import { Phone, MessageCircle, Mail, Clock, MapPin, BadgeCheck } from "lucide-re
 
 import LazyMap from "@/components/LazyMap";
 import LeadForm from "@/components/LeadForm";
+import Reveal from "@/components/motion/Reveal";
+import RevealImage from "@/components/motion/RevealImage";
 import Section from "@/components/Section";
 import Reviews from "@/components/home/Reviews";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -106,23 +108,25 @@ export default function ContactLandingPage() {
       {/* 4. Installation gallery — hidden while there are no real photos */}
       {installationImages.length > 0 && (
         <Section>
-          <div className="mb-10 text-center">
+          <Reveal kind="blur" className="mb-10 text-center">
             <h2 className="text-h2 font-bold">Our Recent Installations</h2>
-          </div>
+          </Reveal>
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {installationImages.map((img) => (
-              <li
-                key={img.src}
-                className="relative aspect-[4/3] overflow-hidden rounded-card bg-bg-soft"
-              >
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover"
-                  loading="lazy"
-                />
+              <li key={img.src}>
+                <RevealImage
+                  variant="scale"
+                  className="relative aspect-[4/3] w-full overflow-hidden rounded-card bg-bg-soft"
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover"
+                    loading="lazy"
+                  />
+                </RevealImage>
               </li>
             ))}
           </ul>
@@ -134,7 +138,7 @@ export default function ContactLandingPage() {
 
       {/* 6. Contact details + map (information, not navigation) */}
       <Section variant="soft">
-        <div className="grid gap-10 lg:grid-cols-2">
+        <Reveal className="grid gap-10 lg:grid-cols-2">
           <div>
             <h2 className="mb-6 text-h3 font-semibold text-navy">Contact details</h2>
             <div className="rounded-card border border-black/5 bg-white p-6 shadow-card sm:p-8">
@@ -202,7 +206,7 @@ export default function ContactLandingPage() {
             </div>
             <LazyMap src={mapSrc} title="Quadbiz Solar Solutions location, Madurai" />
           </div>
-        </div>
+        </Reveal>
       </Section>
     </>
   );

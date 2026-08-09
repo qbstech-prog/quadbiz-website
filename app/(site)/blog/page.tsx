@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
 import { breadcrumbSchema } from "@/lib/schema";
 import { SITE_URL, absoluteUrl } from "@/lib/site";
@@ -68,14 +69,14 @@ export default function BlogListPage() {
             </p>
           </div>
         ) : (
-          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup as="ul" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => {
               const accent = categoryAccent(post.category);
               return (
-                <li key={post.slug}>
+                <RevealItem as="li" key={post.slug}>
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="group flex h-full flex-col overflow-hidden rounded-card border border-black/5 bg-white shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
+                    className="group flex h-full flex-col overflow-hidden rounded-card border border-black/5 bg-white shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
                   >
                     <div
                       className={`flex aspect-[16/9] items-end bg-gradient-to-br ${accent.from} to-white p-4`}
@@ -94,10 +95,10 @@ export default function BlogListPage() {
                       <p className="mt-4 text-xs text-grey">{formatPostDate(post.publishedAt)}</p>
                     </div>
                   </Link>
-                </li>
+                </RevealItem>
               );
             })}
-          </ul>
+          </RevealGroup>
         )}
       </Section>
     </>

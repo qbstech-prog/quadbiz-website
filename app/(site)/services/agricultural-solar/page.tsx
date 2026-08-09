@@ -14,6 +14,8 @@ import {
 
 import FAQ, { type FaqItem } from "@/components/FAQ";
 import LeadForm from "@/components/LeadForm";
+import Reveal from "@/components/motion/Reveal";
+import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
 
@@ -135,43 +137,45 @@ export default function AgriculturalSolarPage() {
 
       {/* Section 2 — Solutions */}
       <Section>
-        <div className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Solar Solutions for Your Farm</h2>
-        </div>
-        <ul className="grid gap-6 md:grid-cols-3">
+        </Reveal>
+        <RevealGroup as="ul" className="grid gap-6 md:grid-cols-3">
           {solutions.map((item) => (
-            <li
+            <RevealItem
+              as="li"
               key={item.title}
-              className="rounded-card border border-black/5 bg-white p-6 shadow-card"
+              className="rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
             >
               <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-green/10 text-green">
                 <item.icon className="h-6 w-6" aria-hidden="true" />
               </span>
               <h3 className="text-lg font-semibold text-navy">{item.title}</h3>
               <p className="mt-2 text-grey">{item.body}</p>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
       </Section>
 
       {/* Section 3 — Why farmers go solar */}
       <Section variant="soft">
-        <div className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Why Farmers Choose Solar</h2>
-        </div>
-        <ul className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        </Reveal>
+        <RevealGroup as="ul" className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map((benefit) => (
-            <li
+            <RevealItem
+              as="li"
               key={benefit.text}
-              className="flex items-center gap-3 rounded-card border border-black/5 bg-white p-5 shadow-card"
+              className="flex items-center gap-3 rounded-card border border-black/5 bg-white p-5 shadow-soft"
             >
               <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-green/10 text-green">
                 <benefit.icon className="h-5 w-5" aria-hidden="true" />
               </span>
               <span className="font-medium text-navy">{benefit.text}</span>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
       </Section>
 
       {/* Section 4 — PM-KUSUM note (green accent band) */}
@@ -180,7 +184,10 @@ export default function AgriculturalSolarPage() {
         this copy general and verify specifics before making any firm claims.
       */}
       <Section>
-        <div className="overflow-hidden rounded-card border border-green/30 bg-green/10 px-6 py-12 text-center md:px-12">
+        <Reveal
+          kind="confident"
+          className="overflow-hidden rounded-card border border-green/30 bg-green/10 px-6 py-12 text-center md:px-12"
+        >
           <span className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-green text-white">
             <Sprout className="h-7 w-7" aria-hidden="true" />
           </span>
@@ -193,26 +200,26 @@ export default function AgriculturalSolarPage() {
           <a href="#quote" className="btn-primary mt-8">
             Check your eligibility
           </a>
-        </div>
+        </Reveal>
       </Section>
 
       {/* Section 5 — FAQ */}
       <Section variant="soft">
-        <div className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Agricultural Solar — Frequently Asked Questions</h2>
-        </div>
+        </Reveal>
         <FAQ items={faqs} />
       </Section>
 
       {/* Section 6 — Lead form */}
       <Section id="quote">
         <div className="mx-auto max-w-2xl">
-          <div className="mb-8 text-center">
+          <Reveal className="mb-8 text-center">
             <h2 className="text-h2 font-bold">Get a Free Farm Site Survey</h2>
             <p className="mt-3 text-grey">
               Tell us about your farm and we&rsquo;ll call you within 24 hours.
             </p>
-          </div>
+          </Reveal>
           <LeadForm source="agricultural-page" defaultPropertyType="Agricultural" />
         </div>
       </Section>

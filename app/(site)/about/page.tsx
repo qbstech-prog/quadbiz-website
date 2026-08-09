@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HeartHandshake, ShieldCheck, MapPin, Workflow, BadgeCheck } from "lucide-react";
 
+import Reveal from "@/components/motion/Reveal";
+import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
 import StatsStrip from "@/components/StatsStrip";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -93,7 +95,7 @@ export default function AboutPage() {
 
       {/* Section 2 — Our story */}
       <Section>
-        <div className="mx-auto max-w-3xl">
+        <Reveal className="mx-auto max-w-3xl">
           <h2 className="text-h2 font-bold">Our Story</h2>
           <p className="mt-5 leading-body text-grey">
             Quadbiz Solar Solutions was founded in 2026 in Madurai by a team of young, driven
@@ -121,40 +123,41 @@ export default function AboutPage() {
               </Link>
             ))}
           </div>
-        </div>
+        </Reveal>
       </Section>
 
       {/* Section 3 — Young company, experienced team */}
       <Section variant="soft">
-        <div className="mx-auto max-w-3xl text-center">
+        <Reveal className="mx-auto max-w-3xl text-center">
           <h2 className="text-h2 font-bold">New Company, Experienced Team</h2>
           <p className="mt-5 text-lg leading-body text-grey">
             We&rsquo;re new as a company, but not new to solar. Our team brings 5+ years of industry
             experience, including international projects — so you get the energy of a fresh local
             business with the know-how of seasoned engineers.
           </p>
-        </div>
+        </Reveal>
       </Section>
 
       {/* Section 4 — Values */}
       <Section>
-        <div className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">What We Stand For</h2>
-        </div>
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        </Reveal>
+        <RevealGroup as="ul" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {values.map((value) => (
-            <li
+            <RevealItem
+              as="li"
               key={value.title}
-              className="rounded-card border border-black/5 bg-white p-6 shadow-card"
+              className="rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
             >
               <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-orange/10 text-orange">
                 <value.icon className="h-6 w-6" aria-hidden="true" />
               </span>
               <h3 className="text-lg font-semibold text-navy">{value.title}</h3>
               <p className="mt-2 text-grey">{value.body}</p>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
 
         {/*
           TODO: Real team photos can drop in here later (grid of headshots +
@@ -164,10 +167,10 @@ export default function AboutPage() {
 
       {/* Section 5 — Credentials */}
       <Section variant="soft">
-        <div className="mb-8 text-center">
+        <Reveal kind="blur" className="mb-8 text-center">
           <h2 className="text-h2 font-bold">Credentials</h2>
-        </div>
-        <div className="mx-auto max-w-3xl">
+        </Reveal>
+        <Reveal className="mx-auto max-w-3xl">
           <ul className="flex flex-wrap justify-center gap-3">
             {credentials.map((item) => (
               <li
@@ -183,15 +186,17 @@ export default function AboutPage() {
             Tier-1 panel &amp; inverter partners: Adani, Waaree, Vikram Solar / Goodwe, Sungrow,
             Polycab.
           </p>
-        </div>
+        </Reveal>
       </Section>
 
       {/* Section 6 — Stats strip (reused from Home) */}
-      <StatsStrip />
+      <Reveal>
+        <StatsStrip />
+      </Reveal>
 
       {/* Section 7 — CTA band */}
       <Section>
-        <div className="mx-auto max-w-3xl text-center">
+        <Reveal kind="confident" className="mx-auto max-w-3xl text-center">
           <h2 className="text-h2 font-bold">Ready to Go Solar?</h2>
           <p className="mt-4 text-lg leading-body text-grey">
             Get a free site survey and a fixed, transparent quote from a local team you can trust.
@@ -204,7 +209,7 @@ export default function AboutPage() {
               WhatsApp Us
             </a>
           </div>
-        </div>
+        </Reveal>
       </Section>
     </>
   );

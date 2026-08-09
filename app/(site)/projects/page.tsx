@@ -7,6 +7,8 @@ import { Home as HomeIcon, Building2, Sprout } from "lucide-react";
 
 import LeadForm from "@/components/LeadForm";
 import ProjectsGrid from "@/components/ProjectsGrid";
+import Reveal from "@/components/motion/Reveal";
+import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
 import { breadcrumbSchema } from "@/lib/schema";
 import { SITE_URL, absoluteUrl } from "@/lib/site";
@@ -92,9 +94,9 @@ export default function ProjectsPage() {
 
       {/* Section 2 — Projects grid OR honest empty state */}
       <Section>
-        <div className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Featured Installations</h2>
-        </div>
+        </Reveal>
 
         {hasProjects ? (
           <ProjectsGrid projects={projects} />
@@ -124,15 +126,15 @@ export default function ProjectsPage() {
 
       {/* Section 3 — Categories mini-links (always show) */}
       <Section variant="soft">
-        <div className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Explore What We Install</h2>
-        </div>
-        <ul className="grid gap-6 md:grid-cols-3">
+        </Reveal>
+        <RevealGroup as="ul" className="grid gap-6 md:grid-cols-3">
           {categories.map((category) => (
-            <li key={category.href}>
+            <RevealItem as="li" key={category.href}>
               <Link
                 href={category.href}
-                className="group flex h-full items-center gap-4 rounded-card border border-black/5 bg-white p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
+                className="group flex h-full items-center gap-4 rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
               >
                 <span className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-orange/10 text-orange">
                   <category.icon className="h-6 w-6" aria-hidden="true" />
@@ -145,20 +147,20 @@ export default function ProjectsPage() {
                   →
                 </span>
               </Link>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
       </Section>
 
       {/* Section 4 — CTA / lead form */}
       <Section id="quote">
         <div className="mx-auto max-w-2xl">
-          <div className="mb-8 text-center">
+          <Reveal className="mb-8 text-center">
             <h2 className="text-h2 font-bold">Want Results Like These?</h2>
             <p className="mt-3 text-grey">
               Get a free site survey and a fixed quote — we&rsquo;ll call you within 24 hours.
             </p>
-          </div>
+          </Reveal>
           <LeadForm source="projects-page" />
         </div>
       </Section>

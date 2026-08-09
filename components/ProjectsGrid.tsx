@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
+import RevealImage from "@/components/motion/RevealImage";
 import { type Project, type ProjectCategory } from "@/lib/content/projects";
 
 type Filter = "All" | ProjectCategory;
@@ -46,7 +47,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
             key={project.slug}
             className="overflow-hidden rounded-card border border-black/5 bg-white shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
           >
-            <div className="relative aspect-[4/3] w-full bg-bg-soft">
+            <RevealImage variant="scale" className="relative aspect-[4/3] w-full bg-bg-soft">
               <Image
                 src={project.image}
                 alt={project.alt}
@@ -55,7 +56,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
                 className="object-cover"
                 loading="lazy"
               />
-            </div>
+            </RevealImage>
             <div className="p-5">
               <div className="mb-2 flex items-center gap-2">
                 <span className="rounded-full bg-green/10 px-2.5 py-1 text-xs font-semibold text-green">

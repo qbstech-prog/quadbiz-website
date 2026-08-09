@@ -17,6 +17,8 @@ import {
 
 import FAQ, { type FaqItem } from "@/components/FAQ";
 import LeadForm from "@/components/LeadForm";
+import Reveal from "@/components/motion/Reveal";
+import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
 
@@ -164,52 +166,55 @@ export default function CommercialSolarPage() {
 
       {/* Section 2 — Ideal for */}
       <Section>
-        <div className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Built for Every Kind of Business</h2>
-        </div>
-        <ul className="mx-auto flex max-w-4xl flex-wrap justify-center gap-3">
+        </Reveal>
+        <RevealGroup as="ul" className="mx-auto flex max-w-4xl flex-wrap justify-center gap-3">
           {idealFor.map((item) => (
-            <li
+            <RevealItem
+              as="li"
               key={item}
-              className="rounded-full border border-navy/15 bg-white px-5 py-2.5 text-sm font-medium text-navy shadow-card"
+              className="rounded-full border border-navy/15 bg-white px-5 py-2.5 text-sm font-medium text-navy shadow-soft"
             >
               {item}
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
       </Section>
 
       {/* Section 3 — Why commercial solar */}
       <Section variant="soft">
-        <div className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Why Businesses Switch to Solar</h2>
-        </div>
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        </Reveal>
+        <RevealGroup as="ul" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map((benefit) => (
-            <li
+            <RevealItem
+              as="li"
               key={benefit.title}
-              className="rounded-card border border-black/5 bg-white p-6 shadow-card"
+              className="rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
             >
               <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-orange/10 text-orange">
                 <benefit.icon className="h-6 w-6" aria-hidden="true" />
               </span>
               <h3 className="text-lg font-semibold text-navy">{benefit.title}</h3>
               <p className="mt-2 text-grey">{benefit.body}</p>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
       </Section>
 
       {/* Section 4 — Turnkey process */}
       <Section>
-        <div className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Our Turnkey Process</h2>
-        </div>
-        <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        </Reveal>
+        <RevealGroup as="ol" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {process.map((step, index) => (
-            <li
+            <RevealItem
+              as="li"
               key={step.title}
-              className="relative rounded-card border border-black/5 bg-white p-6 shadow-card"
+              className="relative rounded-card border border-black/5 bg-white p-6 shadow-soft"
             >
               <span className="font-display text-3xl font-bold text-orange/30">
                 {String(index + 1).padStart(2, "0")}
@@ -218,28 +223,28 @@ export default function CommercialSolarPage() {
                 <step.icon className="h-5 w-5" aria-hidden="true" />
               </span>
               <h3 className="mt-3 text-base font-semibold text-navy">{step.title}</h3>
-            </li>
+            </RevealItem>
           ))}
-        </ol>
+        </RevealGroup>
       </Section>
 
       {/* Section 5 — FAQ */}
       <Section variant="soft">
-        <div className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Commercial Solar — Frequently Asked Questions</h2>
-        </div>
+        </Reveal>
         <FAQ items={faqs} />
       </Section>
 
       {/* Section 6 — Lead form */}
       <Section id="quote">
         <div className="mx-auto max-w-2xl">
-          <div className="mb-8 text-center">
+          <Reveal className="mb-8 text-center">
             <h2 className="text-h2 font-bold">Request a Commercial Solar Assessment</h2>
             <p className="mt-3 text-grey">
               Tell us about your business and we&rsquo;ll call you within 24 hours.
             </p>
-          </div>
+          </Reveal>
           <LeadForm source="commercial-page" defaultPropertyType="Commercial" />
         </div>
       </Section>
