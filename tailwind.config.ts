@@ -46,6 +46,9 @@ const config: Config = {
         card: "0 4px 16px rgba(33, 57, 92, 0.08)",
         "card-hover": "0 8px 28px rgba(33, 57, 92, 0.14)",
         header: "0 1px 12px rgba(33, 57, 92, 0.08)",
+        // Depth scale — soft, diffused, navy-tinted (not harsh black).
+        soft: "0 1px 2px rgba(33, 57, 92, 0.04), 0 4px 16px rgba(33, 57, 92, 0.07)",
+        lift: "0 2px 6px rgba(33, 57, 92, 0.08), 0 14px 32px rgba(33, 57, 92, 0.13)",
       },
       backgroundImage: {
         "cta-gradient": "linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)",

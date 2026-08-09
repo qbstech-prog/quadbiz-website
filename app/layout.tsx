@@ -73,8 +73,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-IN" className={`${bricolage.variable} ${inter.variable}`}>
+    <html
+      lang="en-IN"
+      className={`${bricolage.variable} ${inter.variable}`}
+      suppressHydrationWarning
+    >
       <body>
+        {/* Progressive enhancement: mark JS available so scroll-reveal styles
+            only hide content when JS can reveal it (no-JS users see everything). */}
+        <script
+          dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
+        />
         {/* Site-wide LocalBusiness structured data. */}
         <script
           type="application/ld+json"

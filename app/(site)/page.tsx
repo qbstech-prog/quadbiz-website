@@ -16,6 +16,7 @@ import {
 
 import BrandMarquee from "@/components/BrandMarquee";
 import LeadForm from "@/components/LeadForm";
+import Reveal from "@/components/Reveal";
 import Section from "@/components/Section";
 import StatsStrip from "@/components/StatsStrip";
 import TrustBar from "@/components/TrustBar";
@@ -146,6 +147,26 @@ export default function HomePage() {
               WhatsApp Us
             </a>
           </div>
+
+          {/* Single frosted-glass accent — static (never animates), readable
+              semi-opaque fallback. The only glass element on the site. */}
+          <dl className="glass-card mx-auto mt-12 grid max-w-xl grid-cols-3 gap-4 rounded-card px-6 py-5 shadow-lift">
+            {[
+              { value: "15+", label: "Installations" },
+              { value: "50 kW+", label: "Installed" },
+              { value: "25-Yr", label: "Panel Warranty" },
+            ].map((item) => (
+              <div key={item.label} className="text-center">
+                <dt className="sr-only">{item.label}</dt>
+                <dd>
+                  <span className="block font-display text-2xl font-bold text-navy sm:text-3xl">
+                    {item.value}
+                  </span>
+                  <span className="mt-0.5 block text-xs text-grey">{item.label}</span>
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
@@ -155,21 +176,23 @@ export default function HomePage() {
       {/* Section 2 — Why Quadbiz */}
       {/* ---------------------------------------------------------------- */}
       <Section>
-        <div className="mb-10 text-center">
+        <Reveal className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Why Choose Quadbiz</h2>
-        </div>
+        </Reveal>
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {whyChoose.map((item) => (
-            <li
+          {whyChoose.map((item, i) => (
+            <Reveal
+              as="li"
               key={item.title}
-              className="group rounded-card border border-black/5 bg-white p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
+              delay={i * 60}
+              className="group rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
             >
               <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-orange/10 text-orange">
                 <item.icon className="h-6 w-6" aria-hidden="true" />
               </span>
               <h3 className="text-lg font-semibold text-navy">{item.title}</h3>
               <p className="mt-2 text-grey">{item.body}</p>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </Section>
@@ -183,15 +206,15 @@ export default function HomePage() {
       {/* Section 4 — Services overview */}
       {/* ---------------------------------------------------------------- */}
       <Section variant="soft">
-        <div className="mb-10 text-center">
+        <Reveal className="mb-10 text-center">
           <h2 className="text-h2 font-bold">What We Do</h2>
-        </div>
+        </Reveal>
         <ul className="grid gap-6 md:grid-cols-3">
-          {services.map((service) => (
-            <li key={service.href}>
+          {services.map((service, i) => (
+            <Reveal as="li" key={service.href} delay={i * 60}>
               <Link
                 href={service.href}
-                className="group flex h-full flex-col rounded-card border border-black/5 bg-white p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
+                className="group flex h-full flex-col rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
               >
                 <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-green/10 text-green">
                   <service.icon className="h-6 w-6" aria-hidden="true" />
@@ -205,7 +228,7 @@ export default function HomePage() {
                   </span>
                 </span>
               </Link>
-            </li>
+            </Reveal>
           ))}
         </ul>
         <p className="mx-auto mt-8 max-w-3xl text-center text-grey">
@@ -221,14 +244,16 @@ export default function HomePage() {
       {/* Section 5 — How it works */}
       {/* ---------------------------------------------------------------- */}
       <Section>
-        <div className="mb-10 text-center">
+        <Reveal className="mb-10 text-center">
           <h2 className="text-h2 font-bold">How Going Solar Works</h2>
-        </div>
+        </Reveal>
         <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, index) => (
-            <li
+            <Reveal
+              as="li"
               key={step.title}
-              className="relative rounded-card border border-black/5 bg-white p-6 shadow-card"
+              delay={index * 60}
+              className="relative rounded-card border border-black/5 bg-white p-6 shadow-soft"
             >
               <span className="font-display text-3xl font-bold text-orange/30">
                 {String(index + 1).padStart(2, "0")}
@@ -238,7 +263,7 @@ export default function HomePage() {
               </span>
               <h3 className="mt-3 text-lg font-semibold text-navy">{step.title}</h3>
               <p className="mt-2 text-grey">{step.body}</p>
-            </li>
+            </Reveal>
           ))}
         </ol>
       </Section>
@@ -247,9 +272,9 @@ export default function HomePage() {
       {/* Section 6 — Brands we install */}
       {/* ---------------------------------------------------------------- */}
       <Section variant="soft">
-        <div className="mb-10 text-center">
+        <Reveal className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Trusted Components</h2>
-        </div>
+        </Reveal>
         <BrandMarquee />
         <p className="mx-auto mt-8 max-w-2xl text-center text-grey">
           We use only tier-1 panels and reliable inverters — the components we&rsquo;d put on our own
@@ -261,7 +286,7 @@ export default function HomePage() {
       {/* Section 7 — Subsidy teaser */}
       {/* ---------------------------------------------------------------- */}
       <Section>
-        <div className="overflow-hidden rounded-card bg-cta-gradient px-6 py-12 text-center text-white shadow-card md:px-12 md:py-16">
+        <Reveal className="overflow-hidden rounded-card bg-cta-gradient px-6 py-12 text-center text-white shadow-card md:px-12 md:py-16">
           {/*
             NOTE: The ₹78,000 figure must be verified against current government
             guidelines (PM Surya Ghar: Muft Bijli Yojana) before launch.
@@ -278,7 +303,7 @@ export default function HomePage() {
           >
             See if you qualify
           </Link>
-        </div>
+        </Reveal>
       </Section>
 
       {/* ---------------------------------------------------------------- */}
@@ -291,12 +316,12 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- */}
       <Section id="quote" variant="soft">
         <div className="mx-auto max-w-2xl">
-          <div className="mb-8 text-center">
+          <Reveal className="mb-8 text-center">
             <h2 className="text-h2 font-bold">Get Your Free Solar Quote</h2>
             <p className="mt-3 text-grey">
               Tell us a bit about your property and we&rsquo;ll call you within 24 hours.
             </p>
-          </div>
+          </Reveal>
           <LeadForm source="home-quote" />
         </div>
       </Section>
