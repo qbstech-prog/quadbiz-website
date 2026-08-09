@@ -227,6 +227,111 @@
   }
 }
 
+/* -------------------------------------------------------------------------
+   "Why Choose" animated title underline (skipped under reduced motion).
+   Visible by default (no-JS); hidden then drawn once JS reveals the block.
+   ------------------------------------------------------------------------- */
+.why-underline {
+  display: block;
+  height: 2px;
+  width: 1.75rem;
+  border-radius: 2px;
+  background: var(--brand-orange);
+}
+.js .reveal .why-underline {
+  width: 0;
+  transition: width 350ms ease-out 120ms;
+}
+.js .reveal.reveal-in .why-underline {
+  width: 1.75rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal .why-underline {
+    width: 1.75rem;
+    transition: none;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Process timeline — connecting line draws + steps stagger on scroll-in.
+   Lines are full by default (no-JS / reduced motion); JS hides then draws.
+   ------------------------------------------------------------------------- */
+.timeline-line-h {
+  position: absolute;
+  top: 27px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 2px;
+  background: rgba(33, 57, 92, 0.1);
+  display: none;
+}
+.timeline-line-v {
+  position: absolute;
+  top: 27px;
+  bottom: 27px;
+  left: 27px;
+  width: 2px;
+  background: rgba(33, 57, 92, 0.1);
+}
+.timeline-fill-h {
+  position: absolute;
+  inset: 0;
+  background: var(--brand-orange);
+  transform-origin: left;
+}
+.timeline-fill-v {
+  position: absolute;
+  inset: 0;
+  background: var(--brand-orange);
+  transform-origin: top;
+}
+@media (min-width: 768px) {
+  .timeline-line-h {
+    display: block;
+  }
+  .timeline-line-v {
+    display: none;
+  }
+}
+
+.js .timeline-fill-h {
+  transform: scaleX(0);
+  transition: transform 700ms ease-out;
+}
+.js .timeline-in .timeline-fill-h {
+  transform: scaleX(1);
+}
+.js .timeline-fill-v {
+  transform: scaleY(0);
+  transition: transform 700ms ease-out;
+}
+.js .timeline-in .timeline-fill-v {
+  transform: scaleY(1);
+}
+.js .timeline-step {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 300ms ease-out,
+    transform 300ms ease-out;
+}
+.js .timeline-in .timeline-step {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .timeline-fill-h,
+  .js .timeline-fill-v {
+    transform: none;
+    transition: none;
+  }
+  .js .timeline-step {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* Skip-to-content link — visible only when focused. */
 .skip-link {
   position: absolute;

@@ -19,6 +19,7 @@ import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/Reveal";
 import Section from "@/components/Section";
 import StatsStrip from "@/components/StatsStrip";
+import Timeline from "@/components/Timeline";
 import TrustBar from "@/components/TrustBar";
 import Reviews from "@/components/home/Reviews";
 import { SITE_URL, absoluteUrl, site, whatsappUrl } from "@/lib/site";
@@ -179,19 +180,15 @@ export default function HomePage() {
         <Reveal className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Why Choose Quadbiz</h2>
         </Reveal>
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
           {whyChoose.map((item, i) => (
-            <Reveal
-              as="li"
-              key={item.title}
-              delay={i * 60}
-              className="group rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
-            >
-              <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-orange/10 text-orange">
+            <Reveal as="li" key={item.title} delay={i * 60} className="group flex flex-col items-start">
+              <span className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-orange/10 text-orange shadow-soft transition-all duration-200 group-hover:-translate-y-1 group-hover:shadow-lift">
                 <item.icon className="h-6 w-6" aria-hidden="true" />
               </span>
               <h3 className="text-lg font-semibold text-navy">{item.title}</h3>
-              <p className="mt-2 text-grey">{item.body}</p>
+              <span className="why-underline mt-2" aria-hidden="true" />
+              <p className="mt-3 text-grey">{item.body}</p>
             </Reveal>
           ))}
         </ul>
@@ -244,28 +241,10 @@ export default function HomePage() {
       {/* Section 5 — How it works */}
       {/* ---------------------------------------------------------------- */}
       <Section>
-        <Reveal className="mb-10 text-center">
+        <Reveal className="mb-12 text-center">
           <h2 className="text-h2 font-bold">How Going Solar Works</h2>
         </Reveal>
-        <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step, index) => (
-            <Reveal
-              as="li"
-              key={step.title}
-              delay={index * 60}
-              className="relative rounded-card border border-black/5 bg-white p-6 shadow-soft"
-            >
-              <span className="font-display text-3xl font-bold text-orange/30">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span className="mt-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-navy/5 text-navy">
-                <step.icon className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <h3 className="mt-3 text-lg font-semibold text-navy">{step.title}</h3>
-              <p className="mt-2 text-grey">{step.body}</p>
-            </Reveal>
-          ))}
-        </ol>
+        <Timeline steps={steps.map(({ title, body }) => ({ title, body }))} />
       </Section>
 
       {/* ---------------------------------------------------------------- */}
