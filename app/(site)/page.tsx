@@ -14,6 +14,7 @@ import {
   Zap,
 } from "lucide-react";
 
+import BrandMarquee from "@/components/BrandMarquee";
 import LeadForm from "@/components/LeadForm";
 import Section from "@/components/Section";
 import StatsStrip from "@/components/StatsStrip";
@@ -104,10 +105,6 @@ const steps = [
   },
 ];
 
-const brands = {
-  panels: ["Adani", "Waaree", "Vikram Solar"],
-  inverters: ["Goodwe", "Sungrow", "Polycab"],
-};
 
 export default function HomePage() {
   return (
@@ -253,10 +250,7 @@ export default function HomePage() {
         <div className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Trusted Components</h2>
         </div>
-        <div className="mx-auto max-w-4xl space-y-6">
-          <BrandRow label="Panels" names={brands.panels} />
-          <BrandRow label="Inverters" names={brands.inverters} />
-        </div>
+        <BrandMarquee />
         <p className="mx-auto mt-8 max-w-2xl text-center text-grey">
           We use only tier-1 panels and reliable inverters — the components we&rsquo;d put on our own
           roofs.
@@ -307,20 +301,5 @@ export default function HomePage() {
         </div>
       </Section>
     </>
-  );
-}
-
-function BrandRow({ label, names }: { label: string; names: string[] }) {
-  return (
-    <div className="flex flex-col items-center gap-3 rounded-card border border-black/5 bg-white p-6 shadow-card sm:flex-row sm:gap-6">
-      <span className="text-sm font-semibold uppercase tracking-wide text-grey">{label}</span>
-      <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-        {names.map((name) => (
-          <li key={name} className="font-display text-xl font-bold text-navy sm:text-2xl">
-            {name}
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }

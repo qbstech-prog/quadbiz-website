@@ -143,6 +143,50 @@
   }
 }
 
+/* -------------------------------------------------------------------------
+   Brand logo marquee — seamless infinite scroll of a duplicated track.
+   ------------------------------------------------------------------------- */
+.marquee {
+  overflow: hidden;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+@keyframes brand-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: brand-marquee 30s linear infinite;
+  }
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+/* Reduced motion: no scrolling — show a static, centred, wrapping row. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow: visible;
+  }
+  .marquee-track {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .marquee-track [data-marquee-clone="true"] {
+    display: none;
+  }
+}
+
 /* Skip-to-content link — visible only when focused. */
 .skip-link {
   position: absolute;
