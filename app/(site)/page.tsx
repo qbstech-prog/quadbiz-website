@@ -16,7 +16,8 @@ import {
 
 import BrandMarquee from "@/components/BrandMarquee";
 import LeadForm from "@/components/LeadForm";
-import Reveal from "@/components/Reveal";
+import Reveal from "@/components/motion/Reveal";
+import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
 import StatsStrip from "@/components/StatsStrip";
 import Timeline from "@/components/Timeline";
@@ -177,38 +178,40 @@ export default function HomePage() {
       {/* Section 2 — Why Quadbiz */}
       {/* ---------------------------------------------------------------- */}
       <Section>
-        <Reveal className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Why Choose Quadbiz</h2>
         </Reveal>
-        <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
-          {whyChoose.map((item, i) => (
-            <Reveal as="li" key={item.title} delay={i * 60} className="group flex flex-col items-start">
+        <RevealGroup as="ul" className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
+          {whyChoose.map((item) => (
+            <RevealItem as="li" key={item.title} className="group flex flex-col items-start">
               <span className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-orange/10 text-orange shadow-soft transition-all duration-200 group-hover:-translate-y-1 group-hover:shadow-lift">
                 <item.icon className="h-6 w-6" aria-hidden="true" />
               </span>
               <h3 className="text-lg font-semibold text-navy">{item.title}</h3>
               <span className="why-underline mt-2" aria-hidden="true" />
               <p className="mt-3 text-grey">{item.body}</p>
-            </Reveal>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
       </Section>
 
       {/* ---------------------------------------------------------------- */}
       {/* Section 3 — Stats strip */}
       {/* ---------------------------------------------------------------- */}
-      <StatsStrip />
+      <Reveal>
+        <StatsStrip />
+      </Reveal>
 
       {/* ---------------------------------------------------------------- */}
       {/* Section 4 — Services overview */}
       {/* ---------------------------------------------------------------- */}
       <Section variant="soft">
-        <Reveal className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">What We Do</h2>
         </Reveal>
-        <ul className="grid gap-6 md:grid-cols-3">
-          {services.map((service, i) => (
-            <Reveal as="li" key={service.href} delay={i * 60}>
+        <RevealGroup as="ul" className="grid gap-6 md:grid-cols-3">
+          {services.map((service) => (
+            <RevealItem as="li" key={service.href}>
               <Link
                 href={service.href}
                 className="group flex h-full flex-col rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
@@ -225,9 +228,9 @@ export default function HomePage() {
                   </span>
                 </span>
               </Link>
-            </Reveal>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
         <p className="mx-auto mt-8 max-w-3xl text-center text-grey">
           We also handle subsidy assistance (
           <Link href="/pm-surya-ghar-subsidy" className="link-eco">
@@ -241,7 +244,7 @@ export default function HomePage() {
       {/* Section 5 — How it works */}
       {/* ---------------------------------------------------------------- */}
       <Section>
-        <Reveal className="mb-12 text-center">
+        <Reveal kind="blur" className="mb-12 text-center">
           <h2 className="text-h2 font-bold">How Going Solar Works</h2>
         </Reveal>
         <Timeline steps={steps.map(({ title, body }) => ({ title, body }))} />
@@ -251,7 +254,7 @@ export default function HomePage() {
       {/* Section 6 — Brands we install */}
       {/* ---------------------------------------------------------------- */}
       <Section variant="soft">
-        <Reveal className="mb-10 text-center">
+        <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Trusted Components</h2>
         </Reveal>
         <BrandMarquee />
@@ -265,7 +268,7 @@ export default function HomePage() {
       {/* Section 7 — Subsidy teaser */}
       {/* ---------------------------------------------------------------- */}
       <Section>
-        <Reveal className="overflow-hidden rounded-card bg-cta-gradient px-6 py-12 text-center text-white shadow-card md:px-12 md:py-16">
+        <Reveal kind="confident" className="overflow-hidden rounded-card bg-cta-gradient px-6 py-12 text-center text-white shadow-card md:px-12 md:py-16">
           {/*
             NOTE: The ₹78,000 figure must be verified against current government
             guidelines (PM Surya Ghar: Muft Bijli Yojana) before launch.

@@ -20,7 +20,7 @@ export default function Counter({
   value,
   prefix = "",
   suffix = "",
-  duration = 1000,
+  duration = 1200,
   className = "",
 }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);

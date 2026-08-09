@@ -187,32 +187,6 @@
   }
 }
 
-/* -------------------------------------------------------------------------
-   Light motion — scroll reveal. Progressive enhancement: content is visible by
-   default; only hidden once JS marks <html class="js">, so no-JS users always
-   see content. Disabled entirely under prefers-reduced-motion.
-   ------------------------------------------------------------------------- */
-.js .reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 200ms ease-out,
-    transform 200ms ease-out;
-  will-change: opacity, transform;
-}
-.js .reveal.reveal-in {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .js .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-
 /* One frosted-glass accent (hero only). Semi-opaque solid fallback keeps text
    readable where backdrop-filter is unsupported. Kept static — never animates. */
 .glass-card {
@@ -227,29 +201,13 @@
   }
 }
 
-/* -------------------------------------------------------------------------
-   "Why Choose" animated title underline (skipped under reduced motion).
-   Visible by default (no-JS); hidden then drawn once JS reveals the block.
-   ------------------------------------------------------------------------- */
+/* "Why Choose" static title underline accent. */
 .why-underline {
   display: block;
   height: 2px;
   width: 1.75rem;
   border-radius: 2px;
   background: var(--brand-orange);
-}
-.js .reveal .why-underline {
-  width: 0;
-  transition: width 350ms ease-out 120ms;
-}
-.js .reveal.reveal-in .why-underline {
-  width: 1.75rem;
-}
-@media (prefers-reduced-motion: reduce) {
-  .js .reveal .why-underline {
-    width: 1.75rem;
-    transition: none;
-  }
 }
 
 /* -------------------------------------------------------------------------
