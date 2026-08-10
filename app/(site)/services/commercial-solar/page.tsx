@@ -16,11 +16,12 @@ import {
 } from "lucide-react";
 
 import FAQ, { type FaqItem } from "@/components/FAQ";
+import FeatureGrid from "@/components/FeatureGrid";
 import LeadForm from "@/components/LeadForm";
+import ProcessTimeline from "@/components/ProcessTimeline";
 import Reveal from "@/components/motion/Reveal";
 import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
-import Timeline from "@/components/Timeline";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
 
 const PATH = "/services/commercial-solar";
@@ -188,23 +189,14 @@ export default function CommercialSolarPage() {
         <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Why Businesses Switch to Solar</h2>
         </Reveal>
-        <RevealGroup as="ul" className="mx-auto flex max-w-5xl flex-wrap justify-center gap-6">
-          {benefits.map((benefit) => (
-            <RevealItem
-              as="li"
-              key={benefit.title}
-              className="w-full rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
-            >
-              <div className="flex items-center gap-3">
-                <span className="inline-flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-orange/10 text-orange">
-                  <benefit.icon className="h-6 w-6" aria-hidden="true" />
-                </span>
-                <h3 className="text-lg font-semibold text-navy">{benefit.title}</h3>
-              </div>
-              <p className="mt-3 text-grey">{benefit.body}</p>
-            </RevealItem>
-          ))}
-        </RevealGroup>
+        <FeatureGrid
+          columns={3}
+          items={benefits.map((benefit) => ({
+            icon: <benefit.icon className="h-6 w-6" aria-hidden="true" />,
+            title: benefit.title,
+            body: benefit.body,
+          }))}
+        />
       </Section>
 
       {/* Section 4 — Turnkey process */}
@@ -212,24 +204,12 @@ export default function CommercialSolarPage() {
         <Reveal kind="blur" className="mb-12 text-center">
           <h2 className="text-h2 font-bold">Our Turnkey Process</h2>
         </Reveal>
-        {/* Two connected timeline rows (01–04, 05–08) so 8 steps read as one
-            sequence. Desktop: two horizontal rows; mobile: vertical per row. */}
-        <div className="space-y-12 md:space-y-16">
-          <Timeline
-            startNumber={1}
-            steps={process.slice(0, 4).map((step) => ({
-              title: step.title,
-              icon: <step.icon className="h-4 w-4" aria-hidden="true" />,
-            }))}
-          />
-          <Timeline
-            startNumber={5}
-            steps={process.slice(4).map((step) => ({
-              title: step.title,
-              icon: <step.icon className="h-4 w-4" aria-hidden="true" />,
-            }))}
-          />
-        </div>
+        <ProcessTimeline
+          steps={process.map((step) => ({
+            title: step.title,
+            icon: <step.icon className="h-4 w-4" aria-hidden="true" />,
+          }))}
+        />
       </Section>
 
       {/* Section 5 — FAQ */}

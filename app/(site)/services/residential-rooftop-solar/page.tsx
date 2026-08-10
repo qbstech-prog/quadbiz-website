@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import FAQ, { type FaqItem } from "@/components/FAQ";
+import FeatureGrid from "@/components/FeatureGrid";
 import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/motion/Reveal";
 import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
@@ -167,21 +168,14 @@ export default function ResidentialSolarPage() {
         <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Choose the Right System for Your Home</h2>
         </Reveal>
-        <RevealGroup as="ul" className="grid gap-6 md:grid-cols-3">
-          {systemTypes.map((type) => (
-            <RevealItem
-              as="li"
-              key={type.title}
-              className="rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
-            >
-              <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-orange/10 text-orange">
-                <type.icon className="h-6 w-6" aria-hidden="true" />
-              </span>
-              <h3 className="text-lg font-semibold text-navy">{type.title}</h3>
-              <p className="mt-2 text-grey">{type.body}</p>
-            </RevealItem>
-          ))}
-        </RevealGroup>
+        <FeatureGrid
+          columns={3}
+          items={systemTypes.map((type) => ({
+            icon: <type.icon className="h-6 w-6" aria-hidden="true" />,
+            title: type.title,
+            body: type.body,
+          }))}
+        />
       </Section>
 
       {/* Section 3 — What's included */}

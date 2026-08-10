@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 
 import FAQ, { type FaqItem } from "@/components/FAQ";
+import ProcessTimeline from "@/components/ProcessTimeline";
 import Reveal from "@/components/motion/Reveal";
 import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
@@ -193,23 +194,13 @@ export default function SubsidyPage() {
           <Reveal kind="blur" className="mb-10 text-center">
             <h2 className="text-h2 font-bold">We Manage the Whole Process</h2>
           </Reveal>
-          <RevealGroup as="ol" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {process.map((step, index) => (
-              <RevealItem
-                as="li"
-                key={step.title}
-                className="relative rounded-card border border-black/5 bg-white p-6 shadow-soft"
-              >
-                <span className="font-display text-3xl font-bold text-orange/30">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="mt-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-navy/5 text-navy">
-                  <step.icon className="h-5 w-5" aria-hidden="true" />
-                </span>
-                <h3 className="mt-3 text-lg font-semibold text-navy">{step.title}</h3>
-              </RevealItem>
-            ))}
-          </RevealGroup>
+          <ProcessTimeline
+            columns={3}
+            steps={process.map((step) => ({
+              title: step.title,
+              icon: <step.icon className="h-4 w-4" aria-hidden="true" />,
+            }))}
+          />
         </Section>
 
         {/* Section 6 — FAQ */}

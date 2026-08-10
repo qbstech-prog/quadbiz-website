@@ -324,3 +324,85 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* -------------------------------------------------------------------------
+   ProcessTimeline (Pattern A) — one component for all numbered sequences.
+   Desktop: nodes in balanced rows, a connector drawn per node to the next node
+   in its row (row-height independent). Mobile: one continuous vertical line.
+   Full/static without JS or under reduced motion.
+   ------------------------------------------------------------------------- */
+.ptl-line-v {
+  position: absolute;
+  left: 27px;
+  top: 28px;
+  bottom: 28px;
+  width: 2px;
+  background: rgba(33, 57, 92, 0.1);
+}
+.ptl-fill-v {
+  position: absolute;
+  inset: 0;
+  background: var(--brand-orange);
+  transform-origin: top;
+}
+.ptl-connector {
+  position: absolute;
+  display: none;
+  top: 27px;
+  left: 50%;
+  width: calc(100% + 1.5rem);
+  height: 2px;
+  background: rgba(33, 57, 92, 0.1);
+  z-index: 0;
+}
+.ptl-connector-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--brand-orange);
+  transform-origin: left;
+}
+@media (min-width: 768px) {
+  .ptl-line-v {
+    display: none;
+  }
+  .ptl-connector {
+    display: block;
+  }
+}
+.js .ptl-fill-v {
+  transform: scaleY(0);
+  transition: transform 700ms ease-out;
+}
+.js .ptl-in .ptl-fill-v {
+  transform: scaleY(1);
+}
+.js .ptl-connector-fill {
+  transform: scaleX(0);
+  transition: transform 500ms ease-out;
+}
+.js .ptl-in .ptl-connector-fill {
+  transform: scaleX(1);
+}
+.js .ptl-step {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 300ms ease-out,
+    transform 300ms ease-out;
+}
+.js .ptl-in .ptl-step {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .ptl-fill-v,
+  .js .ptl-connector-fill {
+    transform: none;
+    transition: none;
+  }
+  .js .ptl-step {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

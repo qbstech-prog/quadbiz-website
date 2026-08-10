@@ -16,12 +16,13 @@ import {
 } from "lucide-react";
 
 import BrandMarquee from "@/components/BrandMarquee";
+import FeatureGrid from "@/components/FeatureGrid";
 import LeadForm from "@/components/LeadForm";
+import ProcessTimeline from "@/components/ProcessTimeline";
 import Reveal from "@/components/motion/Reveal";
 import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
 import StatsStrip from "@/components/StatsStrip";
-import Timeline from "@/components/Timeline";
 import TrustBar from "@/components/TrustBar";
 import Reviews from "@/components/home/Reviews";
 import { SITE_URL, absoluteUrl, site, whatsappUrl } from "@/lib/site";
@@ -204,18 +205,14 @@ export default function HomePage() {
         <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Why Choose Quadbiz</h2>
         </Reveal>
-        <RevealGroup as="ul" className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
-          {whyChoose.map((item) => (
-            <RevealItem as="li" key={item.title} className="group flex flex-col items-start">
-              <span className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-orange/10 text-orange shadow-soft transition-all duration-200 group-hover:-translate-y-1 group-hover:shadow-lift">
-                <item.icon className="h-6 w-6" aria-hidden="true" />
-              </span>
-              <h3 className="text-lg font-semibold text-navy">{item.title}</h3>
-              <span className="why-underline mt-2" aria-hidden="true" />
-              <p className="mt-3 text-grey">{item.body}</p>
-            </RevealItem>
-          ))}
-        </RevealGroup>
+        <FeatureGrid
+          columns={4}
+          items={whyChoose.map((item) => ({
+            icon: <item.icon className="h-6 w-6" aria-hidden="true" />,
+            title: item.title,
+            body: item.body,
+          }))}
+        />
       </Section>
 
       {/* ---------------------------------------------------------------- */}
@@ -270,7 +267,13 @@ export default function HomePage() {
         <Reveal kind="blur" className="mb-12 text-center">
           <h2 className="text-h2 font-bold">How Going Solar Works</h2>
         </Reveal>
-        <Timeline steps={steps.map(({ title, body }) => ({ title, body }))} />
+        <ProcessTimeline
+          steps={steps.map((s) => ({
+            title: s.title,
+            body: s.body,
+            icon: <s.icon className="h-4 w-4" aria-hidden="true" />,
+          }))}
+        />
       </Section>
 
       {/* ---------------------------------------------------------------- */}

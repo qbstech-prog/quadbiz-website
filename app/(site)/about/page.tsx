@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HeartHandshake, ShieldCheck, MapPin, Workflow, BadgeCheck } from "lucide-react";
 
+import FeatureGrid from "@/components/FeatureGrid";
 import Reveal from "@/components/motion/Reveal";
-import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
 import StatsStrip from "@/components/StatsStrip";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -143,21 +143,14 @@ export default function AboutPage() {
         <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">What We Stand For</h2>
         </Reveal>
-        <RevealGroup as="ul" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {values.map((value) => (
-            <RevealItem
-              as="li"
-              key={value.title}
-              className="rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
-            >
-              <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-orange/10 text-orange">
-                <value.icon className="h-6 w-6" aria-hidden="true" />
-              </span>
-              <h3 className="text-lg font-semibold text-navy">{value.title}</h3>
-              <p className="mt-2 text-grey">{value.body}</p>
-            </RevealItem>
-          ))}
-        </RevealGroup>
+        <FeatureGrid
+          columns={4}
+          items={values.map((value) => ({
+            icon: <value.icon className="h-6 w-6" aria-hidden="true" />,
+            title: value.title,
+            body: value.body,
+          }))}
+        />
 
         {/*
           TODO: Real team photos can drop in here later (grid of headshots +

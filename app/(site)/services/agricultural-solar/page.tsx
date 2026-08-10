@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import FAQ, { type FaqItem } from "@/components/FAQ";
+import FeatureGrid from "@/components/FeatureGrid";
 import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/motion/Reveal";
 import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
@@ -140,21 +141,14 @@ export default function AgriculturalSolarPage() {
         <Reveal kind="blur" className="mb-10 text-center">
           <h2 className="text-h2 font-bold">Solar Solutions for Your Farm</h2>
         </Reveal>
-        <RevealGroup as="ul" className="grid gap-6 md:grid-cols-3">
-          {solutions.map((item) => (
-            <RevealItem
-              as="li"
-              key={item.title}
-              className="rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
-            >
-              <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-green/10 text-green">
-                <item.icon className="h-6 w-6" aria-hidden="true" />
-              </span>
-              <h3 className="text-lg font-semibold text-navy">{item.title}</h3>
-              <p className="mt-2 text-grey">{item.body}</p>
-            </RevealItem>
-          ))}
-        </RevealGroup>
+        <FeatureGrid
+          columns={3}
+          items={solutions.map((item) => ({
+            icon: <item.icon className="h-6 w-6" aria-hidden="true" />,
+            title: item.title,
+            body: item.body,
+          }))}
+        />
       </Section>
 
       {/* Section 3 — Why farmers go solar */}
