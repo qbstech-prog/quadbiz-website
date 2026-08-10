@@ -1,24 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 
 import { site, whatsappUrl } from "@/lib/site";
+import {
+  BILL_BANDS,
+  MESSAGE_MAX,
+  PROPERTY_TYPES,
+  normalizePhone,
+  validateField,
+  validateLead,
+  type BillBand,
+  type LeadErrors,
+  type LeadField,
+  type PropertyType,
+} from "@/lib/leadValidation";
 
-/** Property type options — values double as the select value and label. */
-export const PROPERTY_TYPES = ["Home", "Commercial", "Agricultural"] as const;
-export type PropertyType = (typeof PROPERTY_TYPES)[number];
-
-/** Average monthly electricity-bill bands. Exported so other components
- *  (e.g. the subsidy calculator) can hand off a valid bucket. */
-export const BILL_BANDS = [
-  "<₹1,500",
-  "₹1,500–3,000",
-  "₹3,000–6,000",
-  "₹6,000–15,000",
-  "₹15,000+",
-] as const;
-export type BillBand = (typeof BILL_BANDS)[number];
+// Re-exported so existing importers (subsidy calculator, handoff flow) keep working.
+export { BILL_BANDS, PROPERTY_TYPES } from "@/lib/leadValidation";
+export type { BillBand, PropertyType } from "@/lib/leadValidation";
 
 export interface LeadFormProps {
   /** Prefill the property type (e.g. handed off from the subsidy calculator). */
@@ -39,39 +40,6 @@ interface FormValues {
   message: string;
 }
 
-type FieldErrors = Partial<Record<keyof FormValues, string>>;
-
-const INDIAN_MOBILE = /^[6-9]\d{9}$/;
-
-function validate(values: FormValues): FieldErrors {
-  const errors: FieldErrors = {};
-
-  if (!values.name.trim()) {
-    errors.name = "Enter your name.";
-  }
-
-  const digits = values.phone.replace(/\D/g, "");
-  if (!digits) {
-    errors.phone = "Enter your phone number.";
-  } else if (!INDIAN_MOBILE.test(digits)) {
-    errors.phone = "Enter a valid 10-digit Indian mobile number.";
-  }
-
-  if (!values.city.trim()) {
-    errors.city = "Tell us your city or town.";
-  }
-
-  if (!values.propertyType) {
-    errors.propertyType = "Choose a property type.";
-  }
-
-  if (!values.bill) {
-    errors.bill = "Choose your average monthly bill.";
-  }
-
-  return errors;
-}
-
 const EMPTY: FormValues = {
   name: "",
   phone: "",
@@ -80,6 +48,9 @@ const EMPTY: FormValues = {
   bill: "",
   message: "",
 };
+
+/** Order used to focus the first invalid field on submit. */
+const FIELD_ORDER: LeadField[] = ["name", "phone", "city", "propertyType", "bill"];
 
 export default function LeadForm({
   defaultPropertyType,
@@ -92,48 +63,69 @@ export default function LeadForm({
     propertyType: defaultPropertyType ?? "",
     bill: defaultBill ?? "",
   });
-  const [errors, setErrors] = useState<FieldErrors>({});
+  const [errors, setErrors] = useState<LeadErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const honeypot = useRef("");
+
+  // Refs to focus the first invalid field on submit.
+  const fieldRefs = useRef<Record<LeadField, HTMLInputElement | HTMLSelectElement | null>>({
+    name: null,
+    phone: null,
+    city: null,
+    propertyType: null,
+    bill: null,
+  });
 
   function update<K extends keyof FormValues>(key: K, value: FormValues[K]) {
-    setValues((prev) => ({ ...prev, [key]: value }));
-    // Clear the field-level error as the user corrects it.
-    setErrors((prev) => (prev[key] ? { ...prev, [key]: undefined } : prev));
+    setValues((prev) => {
+      const next = { ...prev, [key]: value };
+      // Clear a field's error the moment it becomes valid.
+      if (key !== "message" && errors[key as LeadField]) {
+        const stillInvalid = validateField(key as LeadField, next);
+        setErrors((e) => ({ ...e, [key]: stillInvalid }));
+      }
+      return next;
+    });
+  }
+
+  function handleBlur(field: LeadField) {
+    setErrors((prev) => ({ ...prev, [field]: validateField(field, values) }));
   }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
-    const nextErrors = validate(values);
+    // Honeypot: silently "succeed" without sending anything.
+    if (honeypot.current.trim() !== "") {
+      setStatus("success");
+      return;
+    }
+
+    const nextErrors = validateLead(values);
+    setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) {
-      setErrors(nextErrors);
+      const firstInvalid = FIELD_ORDER.find((f) => nextErrors[f]);
+      if (firstInvalid) fieldRefs.current[firstInvalid]?.focus();
       return;
     }
 
     setStatus("submitting");
-
-    const payload = {
-      ...values,
-      phone: values.phone.replace(/\D/g, ""),
-      source,
-      submittedAt: new Date().toISOString(),
-    };
-
-    const endpoint = process.env.LEAD_FORM_ENDPOINT;
-
     try {
-      if (endpoint) {
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error(`Request failed: ${res.status}`);
-      } else {
-        // No endpoint configured yet — log so the UI stays testable.
-        // eslint-disable-next-line no-console
-        console.info("[LeadForm] LEAD_FORM_ENDPOINT not set. Payload:", payload);
-      }
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: values.name.trim(),
+          phone: normalizePhone(values.phone),
+          city: values.city.trim(),
+          propertyType: values.propertyType,
+          bill: values.bill,
+          message: values.message.slice(0, MESSAGE_MAX),
+          source,
+          company: honeypot.current, // honeypot passthrough (server double-checks)
+        }),
+      });
+      if (!res.ok) throw new Error(`Request failed: ${res.status}`);
       setStatus("success");
     } catch (err) {
       // eslint-disable-next-line no-console
@@ -156,12 +148,7 @@ export default function LeadForm({
         </div>
         <h3 className="text-h3 font-semibold">Thanks — we&rsquo;ll call you within 24 hours.</h3>
         <p className="mt-2 text-grey">Prefer to talk now? Message us on WhatsApp.</p>
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="link-eco mt-4 inline-block"
-        >
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="link-eco mt-4 inline-block">
           Chat on WhatsApp →
         </a>
       </div>
@@ -175,15 +162,34 @@ export default function LeadForm({
       className={`rounded-card border border-black/5 bg-white p-6 shadow-card sm:p-8 ${className}`}
       aria-label="Request a free solar quote"
     >
+      {/* Honeypot — visually hidden, off the tab order; bots fill it, humans don't. */}
+      <div aria-hidden="true" className="absolute left-[-9999px] h-px w-px overflow-hidden">
+        <label htmlFor="lead-company">Company (leave blank)</label>
+        <input
+          id="lead-company"
+          name="company"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          onChange={(e) => (honeypot.current = e.target.value)}
+        />
+      </div>
+
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Name" htmlFor="lead-name" error={errors.name} required>
           <input
+            ref={(el) => {
+              fieldRefs.current.name = el;
+            }}
             id="lead-name"
             type="text"
             autoComplete="name"
+            autoCapitalize="words"
             value={values.name}
             onChange={(e) => update("name", e.target.value)}
+            onBlur={() => handleBlur("name")}
             aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? "lead-name-error" : undefined}
             className={inputClass(!!errors.name)}
             placeholder="Your full name"
           />
@@ -191,13 +197,18 @@ export default function LeadForm({
 
         <Field label="Phone" htmlFor="lead-phone" error={errors.phone} required>
           <input
+            ref={(el) => {
+              fieldRefs.current.phone = el;
+            }}
             id="lead-phone"
             type="tel"
             inputMode="numeric"
             autoComplete="tel"
             value={values.phone}
             onChange={(e) => update("phone", e.target.value)}
+            onBlur={() => handleBlur("phone")}
             aria-invalid={!!errors.phone}
+            aria-describedby={errors.phone ? "lead-phone-error" : undefined}
             className={inputClass(!!errors.phone)}
             placeholder="10-digit mobile"
           />
@@ -205,12 +216,18 @@ export default function LeadForm({
 
         <Field label="City / Town" htmlFor="lead-city" error={errors.city} required>
           <input
+            ref={(el) => {
+              fieldRefs.current.city = el;
+            }}
             id="lead-city"
             type="text"
             autoComplete="address-level2"
+            autoCapitalize="words"
             value={values.city}
             onChange={(e) => update("city", e.target.value)}
+            onBlur={() => handleBlur("city")}
             aria-invalid={!!errors.city}
+            aria-describedby={errors.city ? "lead-city-error" : undefined}
             className={inputClass(!!errors.city)}
             placeholder="e.g. Madurai"
           />
@@ -218,10 +235,15 @@ export default function LeadForm({
 
         <Field label="Property type" htmlFor="lead-property" error={errors.propertyType} required>
           <select
+            ref={(el) => {
+              fieldRefs.current.propertyType = el;
+            }}
             id="lead-property"
             value={values.propertyType}
             onChange={(e) => update("propertyType", e.target.value as PropertyType)}
+            onBlur={() => handleBlur("propertyType")}
             aria-invalid={!!errors.propertyType}
+            aria-describedby={errors.propertyType ? "lead-property-error" : undefined}
             className={inputClass(!!errors.propertyType)}
           >
             <option value="" disabled>
@@ -243,10 +265,15 @@ export default function LeadForm({
           className="sm:col-span-2"
         >
           <select
+            ref={(el) => {
+              fieldRefs.current.bill = el;
+            }}
             id="lead-bill"
             value={values.bill}
             onChange={(e) => update("bill", e.target.value as BillBand)}
+            onBlur={() => handleBlur("bill")}
             aria-invalid={!!errors.bill}
+            aria-describedby={errors.bill ? "lead-bill-error" : undefined}
             className={inputClass(!!errors.bill)}
           >
             <option value="" disabled>
@@ -264,6 +291,7 @@ export default function LeadForm({
           <textarea
             id="lead-message"
             rows={3}
+            maxLength={MESSAGE_MAX}
             value={values.message}
             onChange={(e) => update("message", e.target.value)}
             className={inputClass(false)}
@@ -326,7 +354,7 @@ function Field({ label, htmlFor, error, required, optional, className = "", chil
       </label>
       {children}
       {error && (
-        <p className="mt-1 text-sm text-orange" role="alert">
+        <p id={`${htmlFor}-error`} className="mt-1 text-sm text-orange" role="alert">
           {error}
         </p>
       )}
