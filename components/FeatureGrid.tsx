@@ -10,11 +10,13 @@ export interface FeatureItem {
 }
 
 /**
- * The one feature / value card pattern for the whole site (Pattern B).
- * Light card (hairline border + soft shadow, hover-lift), coloured icon tile
- * top-left with the title beside it, description below. Flex-wrap + centered so
- * grids stay balanced with no orphan (4-up, 5→3+2 centered, 6→3+3); items in a
- * row share height. Staggered fade-up reveal (via RevealGroup).
+ * The one feature / value grid pattern for the whole site (Pattern B).
+ * Borderless open columns — no card box, border, or shadow: a coloured icon
+ * tile on top, bold navy title, a short orange underline accent, then the grey
+ * description. Items are top-aligned so the icon/title/underline rows line up
+ * regardless of description length. Only the icon tile lifts gently on hover.
+ * Balanced flex-wrap centered rows (4-up, 5→3+2, 6→3+3) with a staggered
+ * fade-up reveal (via RevealGroup).
  */
 export default function FeatureGrid({
   items,
@@ -25,24 +27,24 @@ export default function FeatureGrid({
 }) {
   const widthClass =
     columns === 3
-      ? "sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
-      : "sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]";
-  const maxWidth = columns === 3 ? "max-w-5xl" : "max-w-6xl";
+      ? "sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)]"
+      : "sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)]";
 
   return (
-    <RevealGroup as="ul" className={`mx-auto flex ${maxWidth} flex-wrap justify-center gap-6`}>
+    <RevealGroup as="ul" className="flex flex-wrap justify-center gap-x-8 gap-y-10">
       {items.map((item) => (
         <RevealItem
           as="li"
           key={item.title}
-          className={`w-full rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift ${widthClass}`}
+          className={`group flex w-full flex-col items-start ${widthClass}`}
         >
-          <div className="flex items-center gap-3">
-            <span className="inline-flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-orange/10 text-orange">
-              {item.icon}
-            </span>
-            <h3 className="text-lg font-semibold text-navy [text-wrap:balance]">{item.title}</h3>
-          </div>
+          <span className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-orange/10 text-orange shadow-soft transition-all duration-200 group-hover:-translate-y-1 group-hover:shadow-lift">
+            {item.icon}
+          </span>
+          <h3 className="text-lg font-semibold text-navy [hyphens:none] [text-wrap:balance]">
+            {item.title}
+          </h3>
+          <span className="mt-2 block h-[3px] w-10 rounded-full bg-orange" aria-hidden="true" />
           <p className="mt-3 text-grey">{item.body}</p>
         </RevealItem>
       ))}
