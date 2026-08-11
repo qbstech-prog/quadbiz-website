@@ -11,27 +11,27 @@ const TRUST_POINTS = [
 ] as const;
 
 /**
- * Thin band of "verified fact" chips — quiet support under the hero.
- * Chips spring in with a light stagger when the bar enters view.
+ * Row of "verified fact" chips. Rendered inside the hero over the photo, so the
+ * pills stay lightly frosted white (never transparent) to keep the near-black
+ * text and orange check icons legible against the installation image.
+ * Chips spring in with a light stagger when they enter view.
  */
 export default function TrustBar({ className = "" }: { className?: string }) {
   return (
-    <div className={`bg-white ${className}`}>
-      <RevealGroup
-        as="ul"
-        className="mx-auto flex max-w-container flex-wrap items-center justify-center gap-2.5 px-4 pb-6 pt-3 sm:px-6 lg:px-8"
-      >
-        {TRUST_POINTS.map((point) => (
-          <RevealItem
-            as="li"
-            key={point}
-            className="inline-flex items-center gap-1.5 rounded-full border border-black/5 bg-white px-3.5 py-1.5 text-sm font-medium text-navy shadow-soft"
-          >
-            <BadgeCheck className="h-4 w-4 flex-shrink-0 text-orange" aria-hidden="true" />
-            {point}
-          </RevealItem>
-        ))}
-      </RevealGroup>
-    </div>
+    <RevealGroup
+      as="ul"
+      className={`flex flex-wrap items-center justify-center gap-2.5 ${className}`}
+    >
+      {TRUST_POINTS.map((point) => (
+        <RevealItem
+          as="li"
+          key={point}
+          className="inline-flex items-center gap-1.5 rounded-full border border-black/5 bg-white/90 px-3.5 py-1.5 text-sm font-medium text-navy shadow-soft backdrop-blur-sm"
+        >
+          <BadgeCheck className="h-4 w-4 flex-shrink-0 text-orange" aria-hidden="true" />
+          {point}
+        </RevealItem>
+      ))}
+    </RevealGroup>
   );
 }

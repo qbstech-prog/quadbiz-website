@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Handshake,
@@ -122,7 +123,29 @@ export default function HomePage() {
       {/* Section 1 — Hero */}
       {/* ---------------------------------------------------------------- */}
       <section className="relative isolate overflow-hidden bg-white">
-        {/* Soft radial orange glow behind the hero content (over white). */}
+        {/* Full-bleed hero photo — the LCP element, so it loads eagerly (priority)
+            and is never lazy-loaded. next/image serves an optimized AVIF/WebP. */}
+        <Image
+          src="/hero/hero-solar-installation.png"
+          alt="Quadbiz solar panel installation on a rooftop in Madurai"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[50%_62%]"
+        />
+        {/* Readability scrim: strong white behind the centred text column, fading
+            to transparent at the edges so the photo still reads there. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(130% 95% at 50% 44%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.78) 42%, rgba(255,255,255,0.35) 78%, rgba(255,255,255,0) 100%)",
+          }}
+        />
+        {/* Slight overall veil — strengthened on mobile where text sits tighter. */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/30 sm:bg-white/15" />
+        {/* Signature sun glow, layered above the photo for warmth (static). */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-sun-glow" />
         <div className="relative z-10 mx-auto w-full max-w-container px-4 pb-12 pt-24 text-center sm:px-6 md:pb-16 md:pt-32 lg:px-8">
           <p className="text-sm font-medium uppercase tracking-[0.14em] text-orange">
@@ -145,7 +168,7 @@ export default function HomePage() {
             </a>
           </div>
 
-          {/* Quiet stats row — hairline card on white (no glass over a photo now). */}
+          {/* Quiet stats row — opaque hairline card, readable over the hero photo. */}
           <dl className="mx-auto mt-14 grid max-w-xl grid-cols-3 gap-4 rounded-2xl border border-line bg-white px-6 py-5 shadow-card">
             {[
               { value: "15+", label: "Installations" },
@@ -163,10 +186,11 @@ export default function HomePage() {
               </div>
             ))}
           </dl>
+
+          {/* Trust chips — last element of the hero, frosted over the photo. */}
+          <TrustBar className="mt-10 sm:mt-12" />
         </div>
       </section>
-
-      <TrustBar />
 
       {/* ---------------------------------------------------------------- */}
       {/* Section 2 — Why Quadbiz */}

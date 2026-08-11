@@ -1,15 +1,8 @@
 import type { Metadata } from "next";
-import {
-  BadgeCheck,
-  ClipboardList,
-  FileSignature,
-  Wrench,
-  PlugZap,
-  Banknote,
-} from "lucide-react";
+import { BadgeCheck } from "lucide-react";
 
 import FAQ, { type FaqItem } from "@/components/FAQ";
-import ProcessCards from "@/components/ProcessCards";
+import ProcessStepper from "@/components/ProcessStepper";
 import Reveal from "@/components/motion/Reveal";
 import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
@@ -37,12 +30,12 @@ const eligibility = [
 ];
 
 const process = [
-  { icon: BadgeCheck, title: "Eligibility check & consultation" },
-  { icon: ClipboardList, title: "Registration on the National Portal" },
-  { icon: FileSignature, title: "System design & fixed quote" },
-  { icon: Wrench, title: "Installation by our in-house team" },
-  { icon: PlugZap, title: "Net metering with TANGEDCO" },
-  { icon: Banknote, title: "Subsidy disbursed to your bank account" },
+  { title: "Eligibility check & consultation" },
+  { title: "Registration on the National Portal" },
+  { title: "System design & fixed quote" },
+  { title: "Installation by our in-house team" },
+  { title: "Net metering with TANGEDCO" },
+  { title: "Subsidy disbursed to your bank account" },
 ];
 
 const faqs: FaqItem[] = [
@@ -194,13 +187,7 @@ export default function SubsidyPage() {
           <Reveal kind="blur" className="mb-10 text-center">
             <h2 className="text-h2">We Manage the Whole Process</h2>
           </Reveal>
-          <ProcessCards
-            tone="dark"
-            steps={process.map((step) => ({
-              title: step.title,
-              icon: <step.icon className="h-4 w-4" aria-hidden="true" />,
-            }))}
-          />
+          <ProcessStepper tone="dark" steps={process} />
         </Section>
 
         {/* Section 6 — FAQ */}

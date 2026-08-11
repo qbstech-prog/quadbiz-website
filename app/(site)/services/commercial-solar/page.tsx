@@ -1,19 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  TrendingDown,
-  Clock,
-  Receipt,
-  Leaf,
-  PlugZap,
-  ClipboardList,
-  DraftingCompass,
-  HardHat,
-  Cpu,
-  ShieldCheck,
-  Activity,
-  Brush,
-} from "lucide-react";
+import { TrendingDown, Clock, Receipt, Leaf, PlugZap } from "lucide-react";
 
 import FAQ, { type FaqItem } from "@/components/FAQ";
 import FeatureGrid from "@/components/FeatureGrid";
@@ -77,14 +64,14 @@ const benefits = [
 ];
 
 const process = [
-  { icon: ClipboardList, title: "Energy audit & load analysis" },
-  { icon: DraftingCompass, title: "Custom system design (rooftop or ground-mount)" },
-  { icon: HardHat, title: "Structural & civil work" },
-  { icon: Cpu, title: "Tier-1 panels + string/central inverters" },
-  { icon: ShieldCheck, title: "Installation & safety compliance" },
-  { icon: PlugZap, title: "Net metering with TANGEDCO" },
-  { icon: Activity, title: "Monitoring" },
-  { icon: Brush, title: "AMC & scheduled cleaning" },
+  { title: "Energy audit & load analysis" },
+  { title: "Custom system design (rooftop or ground-mount)" },
+  { title: "Structural & civil work" },
+  { title: "Tier-1 panels + string/central inverters" },
+  { title: "Installation & safety compliance" },
+  { title: "Net metering with TANGEDCO" },
+  { title: "Monitoring" },
+  { title: "AMC & scheduled cleaning" },
 ];
 
 const faqs: FaqItem[] = [
@@ -204,13 +191,7 @@ export default function CommercialSolarPage() {
         <Reveal kind="blur" className="mb-12 text-center">
           <h2 className="text-h2">Our Turnkey Process</h2>
         </Reveal>
-        <ProcessStepper
-          tone="dark"
-          steps={process.map((step) => ({
-            title: step.title,
-            icon: <step.icon className="h-4 w-4" aria-hidden="true" />,
-          }))}
-        />
+        <ProcessStepper tone="dark" steps={process} />
       </Section>
 
       {/* Section 5 — FAQ */}
