@@ -68,7 +68,7 @@ export default function ContactLandingPage() {
             />
           </Link>
           <div className="flex items-center gap-2">
-            <a href={telHref} className="hidden font-display text-lg font-bold text-navy sm:block">
+            <a href={telHref} className="hidden font-heading text-lg font-bold text-navy sm:block">
               {site.phonePrimaryDisplay}
             </a>
             <a
@@ -96,7 +96,7 @@ export default function ContactLandingPage() {
       <section className="bg-bg-soft">
         <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 md:py-14 lg:px-8">
           <div className="mb-8 text-center">
-            <h1 className="text-h1 font-bold text-navy">Get Your Free Solar Quote</h1>
+            <h1 className="text-h1 text-navy">Get Your Free Solar Quote</h1>
             <p className="mt-4 text-lg leading-body text-grey">
               Tell us about your property and we&rsquo;ll call you within 24 hours.
             </p>
@@ -109,7 +109,7 @@ export default function ContactLandingPage() {
       {installationImages.length > 0 && (
         <Section>
           <Reveal kind="blur" className="mb-10 text-center">
-            <h2 className="text-h2 font-bold">Our Recent Installations</h2>
+            <h2 className="text-h2">Our Recent Installations</h2>
           </Reveal>
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {installationImages.map((img) => (
@@ -142,7 +142,7 @@ export default function ContactLandingPage() {
           <div>
             <h2 className="mb-6 text-h3 font-semibold text-navy">Contact details</h2>
             <div className="rounded-card border border-black/5 bg-white p-6 shadow-card sm:p-8">
-              <p className="font-display text-lg font-bold text-navy">{site.name}</p>
+              <p className="font-heading text-lg font-bold text-navy">{site.name}</p>
               <ul className="mt-5 space-y-4 text-ink">
                 <li className="flex items-start gap-3">
                   <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange" aria-hidden="true" />
@@ -176,12 +176,12 @@ export default function ContactLandingPage() {
                   <span>{site.hours}</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-green" aria-hidden="true" />
+                  <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange" aria-hidden="true" />
                   <span>All of Tamil Nadu · HQ Madurai</span>
                 </li>
               </ul>
-              <span className="mt-6 inline-flex items-center gap-2 rounded-full border border-green/40 bg-green/10 px-3 py-1 text-xs font-semibold text-navy">
-                <BadgeCheck className="h-4 w-4 text-green" aria-hidden="true" />
+              <span className="mt-6 inline-flex items-center gap-2 rounded-full border border-orange/40 bg-orange/10 px-3 py-1 text-xs font-semibold text-navy">
+                <BadgeCheck className="h-4 w-4 text-orange" aria-hidden="true" />
                 MNRE Registered
               </span>
               <div className="mt-6 flex flex-wrap gap-3">

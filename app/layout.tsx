@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 
 import FloatingButtons from "@/components/FloatingButtons";
 import { localBusinessSchema } from "@/lib/schema";
@@ -7,20 +7,11 @@ import { SITE_URL, site } from "@/lib/site";
 
 import "./globals.css";
 
-// Display/headings — Bricolage Grotesque, only the weights we use.
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-display",
-  display: "swap",
-  fallback: ["system-ui", "sans-serif"],
-});
-
-// Body/UI — Inter.
+// Inter — the single typeface for everything (headings, titles, body, UI).
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-body",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font",
   display: "swap",
   fallback: ["system-ui", "sans-serif"],
 });
@@ -75,7 +66,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-IN"
-      className={`${bricolage.variable} ${inter.variable}`}
+      className={inter.variable}
       suppressHydrationWarning
     >
       <body>

@@ -80,7 +80,7 @@ export default function ProcessTimeline({
                   <span className="ptl-connector-fill" style={inView ? { transitionDelay: delay } : undefined} />
                 </span>
               )}
-              <span className="relative z-10 flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border border-black/5 bg-white font-display text-xl font-bold text-orange shadow-soft">
+              <span className="relative z-10 flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-orange font-semibold text-xl text-white shadow-glow-node">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div className="md:mt-1">

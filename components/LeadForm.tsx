@@ -137,11 +137,11 @@ export default function LeadForm({
   if (status === "success") {
     return (
       <div
-        className={`rounded-card border border-green/30 bg-green/10 p-6 text-center sm:p-8 ${className}`}
+        className={`rounded-card border border-orange/30 bg-orange/10 p-6 text-center sm:p-8 ${className}`}
         role="status"
         aria-live="polite"
       >
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green text-white">
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-orange text-white">
           <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M20 6 9 17l-5-5" />
           </svg>

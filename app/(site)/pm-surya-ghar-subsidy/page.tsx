@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 import FAQ, { type FaqItem } from "@/components/FAQ";
-import ProcessTimeline from "@/components/ProcessTimeline";
+import ProcessCards from "@/components/ProcessCards";
 import Reveal from "@/components/motion/Reveal";
 import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
@@ -110,10 +110,10 @@ export default function SubsidyPage() {
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-sun-glow" />
         <div className="relative mx-auto max-w-container px-4 py-16 sm:px-6 md:py-20 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-orange">
+            <p className="text-sm font-semibold font-heading uppercase tracking-[0.15em] text-orange">
               Government Scheme
             </p>
-            <h1 className="mt-4 text-h1 font-bold text-navy">
+            <h1 className="mt-4 text-h1 text-navy">
               PM Surya Ghar Subsidy — Rooftop Solar Support in Tamil Nadu
             </h1>
             <p className="mt-5 text-lg leading-body text-grey">
@@ -131,10 +131,10 @@ export default function SubsidyPage() {
         </div>
       </section>
 
-      {/* Section 2 — Subsidy structure */}
-      <Section>
+      {/* Section 2 — Subsidy structure (grey, so the table contrasts its neighbours) */}
+      <Section surface="grey">
         <Reveal kind="blur" className="mb-8 text-center">
-          <h2 className="text-h2 font-bold">How Much Subsidy Can You Get?</h2>
+          <h2 className="text-h2">How Much Subsidy Can You Get?</h2>
         </Reveal>
         <div className="mx-auto max-w-2xl overflow-x-auto">
           <table className="w-full border-collapse overflow-hidden rounded-card border border-black/10 text-left">
@@ -171,9 +171,9 @@ export default function SubsidyPage() {
       {/* Sections 3 & 7 (calculator + lead form) wrap sections 4–6 as children */}
       <SubsidyLeadFlow>
         {/* Section 4 — Eligibility */}
-        <Section>
+        <Section surface="grey">
           <Reveal kind="blur" className="mb-8 text-center">
-            <h2 className="text-h2 font-bold">Who Is Eligible?</h2>
+            <h2 className="text-h2">Who Is Eligible?</h2>
           </Reveal>
           <RevealGroup as="ul" className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
             {eligibility.map((item) => (
@@ -182,20 +182,20 @@ export default function SubsidyPage() {
                 key={item}
                 className="flex items-start gap-3 rounded-card border border-black/5 bg-white p-4 shadow-soft"
               >
-                <BadgeCheck className="mt-0.5 h-5 w-5 flex-shrink-0 text-green" aria-hidden="true" />
+                <BadgeCheck className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange" aria-hidden="true" />
                 <span className="text-ink">{item}</span>
               </RevealItem>
             ))}
           </RevealGroup>
         </Section>
 
-        {/* Section 5 — How Quadbiz handles it */}
-        <Section variant="soft">
+        {/* Section 5 — How Quadbiz handles it (dark punctuation; numbered cards shape) */}
+        <Section surface="dark">
           <Reveal kind="blur" className="mb-10 text-center">
-            <h2 className="text-h2 font-bold">We Manage the Whole Process</h2>
+            <h2 className="text-h2">We Manage the Whole Process</h2>
           </Reveal>
-          <ProcessTimeline
-            columns={3}
+          <ProcessCards
+            tone="dark"
             steps={process.map((step) => ({
               title: step.title,
               icon: <step.icon className="h-4 w-4" aria-hidden="true" />,
@@ -206,7 +206,7 @@ export default function SubsidyPage() {
         {/* Section 6 — FAQ */}
         <Section>
           <Reveal kind="blur" className="mb-10 text-center">
-            <h2 className="text-h2 font-bold">PM Surya Ghar — Frequently Asked Questions</h2>
+            <h2 className="text-h2">PM Surya Ghar — Frequently Asked Questions</h2>
           </Reveal>
           <FAQ items={faqs} />
         </Section>

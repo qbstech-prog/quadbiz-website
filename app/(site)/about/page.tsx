@@ -81,10 +81,10 @@ export default function AboutPage() {
       <section className="bg-bg-soft">
         <div className="mx-auto max-w-container px-4 py-16 sm:px-6 md:py-20 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-orange">
+            <p className="text-sm font-semibold font-heading uppercase tracking-[0.15em] text-orange">
               About Us
             </p>
-            <h1 className="mt-4 text-h1 font-bold text-navy">About Quadbiz Solar Solutions</h1>
+            <h1 className="mt-4 text-h1 text-navy">About Quadbiz Solar Solutions</h1>
             <p className="mt-5 text-lg leading-body text-grey">
               A Madurai solar company on a simple mission — make going solar honest, affordable, and
               built to last.
@@ -96,7 +96,7 @@ export default function AboutPage() {
       {/* Section 2 — Our story */}
       <Section>
         <Reveal className="mx-auto max-w-3xl">
-          <h2 className="text-h2 font-bold">Our Story</h2>
+          <h2 className="text-h2">Our Story</h2>
           <p className="mt-5 leading-body text-grey">
             Quadbiz Solar Solutions was founded in 2026 in Madurai by a team of young, driven
             professionals with international and hands-on experience in the solar industry. We
@@ -129,7 +129,7 @@ export default function AboutPage() {
       {/* Section 3 — Young company, experienced team */}
       <Section variant="soft">
         <Reveal className="mx-auto max-w-3xl text-center">
-          <h2 className="text-h2 font-bold">New Company, Experienced Team</h2>
+          <h2 className="text-h2">New Company, Experienced Team</h2>
           <p className="mt-5 text-lg leading-body text-grey">
             We&rsquo;re new as a company, but not new to solar. Our team brings 5+ years of industry
             experience, including international projects — so you get the energy of a fresh local
@@ -141,7 +141,7 @@ export default function AboutPage() {
       {/* Section 4 — Values */}
       <Section>
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">What We Stand For</h2>
+          <h2 className="text-h2">What We Stand For</h2>
         </Reveal>
         <FeatureGrid
           columns={4}
@@ -161,16 +161,16 @@ export default function AboutPage() {
       {/* Section 5 — Credentials */}
       <Section variant="soft">
         <Reveal kind="blur" className="mb-8 text-center">
-          <h2 className="text-h2 font-bold">Credentials</h2>
+          <h2 className="text-h2">Credentials</h2>
         </Reveal>
         <Reveal className="mx-auto max-w-3xl">
           <ul className="flex flex-wrap justify-center gap-3">
             {credentials.map((item) => (
               <li
                 key={item}
-                className="inline-flex items-center gap-2 rounded-full border border-green/40 bg-green/10 px-4 py-2 text-sm font-semibold text-navy"
+                className="inline-flex items-center gap-2 rounded-full border border-orange/40 bg-orange/10 px-4 py-2 text-sm font-semibold text-navy"
               >
-                <BadgeCheck className="h-4 w-4 text-green" aria-hidden="true" />
+                <BadgeCheck className="h-4 w-4 text-orange" aria-hidden="true" />
                 {item}
               </li>
             ))}
@@ -190,7 +190,7 @@ export default function AboutPage() {
       {/* Section 7 — CTA band */}
       <Section>
         <Reveal kind="confident" className="mx-auto max-w-3xl text-center">
-          <h2 className="text-h2 font-bold">Ready to Go Solar?</h2>
+          <h2 className="text-h2">Ready to Go Solar?</h2>
           <p className="mt-4 text-lg leading-body text-grey">
             Get a free site survey and a fixed, transparent quote from a local team you can trust.
           </p>

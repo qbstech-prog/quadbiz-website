@@ -26,9 +26,9 @@ export default function SubsidyLeadFlow({ children }: { children: ReactNode }) {
   return (
     <>
       {/* Section 3 — Calculator */}
-      <Section variant="soft">
+      <Section surface="white">
         <div className="mb-8 text-center">
-          <h2 className="text-h2 font-bold">Estimate Your Subsidy &amp; Savings</h2>
+          <h2 className="text-h2">Estimate Your Subsidy &amp; Savings</h2>
         </div>
         <SubsidyCalculator onGetQuote={handleGetQuote} />
       </Section>
@@ -37,10 +37,10 @@ export default function SubsidyLeadFlow({ children }: { children: ReactNode }) {
       {children}
 
       {/* Section 7 — Lead form. key forces a fresh prefill when the bucket changes. */}
-      <Section id="quote" variant="soft">
+      <Section id="quote" surface="grey">
         <div className="mx-auto max-w-2xl">
           <div className="mb-8 text-center">
-            <h2 className="text-h2 font-bold">Start Your Subsidy Application</h2>
+            <h2 className="text-h2">Start Your Subsidy Application</h2>
             <p className="mt-3 text-grey">
               Get a free eligibility check and a fixed quote — we&rsquo;ll call you within 24 hours.
             </p>

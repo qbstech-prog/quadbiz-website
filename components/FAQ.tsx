@@ -29,7 +29,7 @@ export default function FAQ({ items }: { items: FaqItem[] }) {
               aria-expanded={isOpen}
               aria-controls={panelId}
               onClick={() => setOpenIndex(isOpen ? null : i)}
-              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-base font-semibold text-navy transition-colors hover:bg-bg-soft sm:px-6"
+              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-base font-semibold text-navy transition-colors hover:bg-[#F7F7F8] sm:px-6"
             >
               <span>{item.question}</span>
               <svg

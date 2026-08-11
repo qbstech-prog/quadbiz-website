@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import {
   Handshake,
@@ -122,61 +121,32 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- */}
       {/* Section 1 — Hero */}
       {/* ---------------------------------------------------------------- */}
-      <section className="relative isolate flex min-h-[600px] items-center overflow-hidden bg-bg-soft md:min-h-[680px]">
-        {/* Full-bleed hero photo — this is the LCP element, so it loads eagerly
-            (priority) and is never lazy-loaded. next/image serves an optimized
-            AVIF/WebP; the original PNG stays in /public/hero as the source. */}
-        <Image
-          src="/hero/hero-solar-installation.png"
-          alt="Quadbiz solar panel installation on a rooftop in Madurai"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[50%_62%]"
-        />
-        {/* Readability scrim: strong white behind the centred text column, fading
-            to transparent at the edges so the photo still reads there. */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(130% 95% at 50% 44%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.78) 42%, rgba(255,255,255,0.35) 78%, rgba(255,255,255,0) 100%)",
-          }}
-        />
-        {/* Slight overall veil — strengthened on mobile where text sits tighter. */}
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/30 sm:bg-white/15" />
-        {/* Signature sun-ray glow, layered above the photo for warmth (static). */}
+      <section className="relative isolate overflow-hidden bg-white">
+        {/* Soft radial orange glow behind the hero content (over white). */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-sun-glow" />
-        <div className="relative z-10 mx-auto w-full max-w-container px-4 py-16 text-center sm:px-6 md:py-20 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.15em] text-orange">
+        <div className="relative z-10 mx-auto w-full max-w-container px-4 pb-12 pt-24 text-center sm:px-6 md:pb-16 md:pt-32 lg:px-8">
+          <p className="text-sm font-medium uppercase tracking-[0.14em] text-orange">
             MNRE Registered · Serving All of Tamil Nadu
           </p>
-          <h1 className="mx-auto mt-4 max-w-4xl text-h1 font-bold text-navy">
-            Solar Power for Homes, Businesses &amp; Farms in Madurai
+          <h1 className="mx-auto mt-5 max-w-4xl text-h1 text-navy">
+            Solar Power for Homes, Businesses &amp; Farms in <span className="text-orange">Madurai</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-body text-grey">
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-body text-grey">
             Quadbiz Solar Solutions handles everything under one roof — from paperwork and subsidy
             approvals to civil work and installation. Quality panels, competitive pricing, and local
             service you can trust.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
             <Link href="/contact" className="btn-primary">
               Get Free Quote
             </Link>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary"
-            >
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary">
               WhatsApp Us
             </a>
           </div>
 
-          {/* Single frosted-glass accent — static (never animates), readable
-              semi-opaque fallback. The only glass element on the site. */}
-          <dl className="glass-card mx-auto mt-12 grid max-w-xl grid-cols-3 gap-4 rounded-card px-6 py-5 shadow-lift">
+          {/* Quiet stats row — hairline card on white (no glass over a photo now). */}
+          <dl className="mx-auto mt-14 grid max-w-xl grid-cols-3 gap-4 rounded-2xl border border-line bg-white px-6 py-5 shadow-card">
             {[
               { value: "15+", label: "Installations" },
               { value: "50 kW+", label: "Installed" },
@@ -185,10 +155,10 @@ export default function HomePage() {
               <div key={item.label} className="text-center">
                 <dt className="sr-only">{item.label}</dt>
                 <dd>
-                  <span className="block font-display text-2xl font-bold text-navy sm:text-3xl">
+                  <span className="block text-2xl font-semibold tracking-[-0.03em] text-navy sm:text-3xl">
                     {item.value}
                   </span>
-                  <span className="mt-0.5 block text-xs text-grey">{item.label}</span>
+                  <span className="mt-1 block text-xs text-grey">{item.label}</span>
                 </dd>
               </div>
             ))}
@@ -201,9 +171,9 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- */}
       {/* Section 2 — Why Quadbiz */}
       {/* ---------------------------------------------------------------- */}
-      <Section>
+      <Section surface="grey">
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">Why Choose Quadbiz</h2>
+          <h2 className="text-h2">Why Choose Quadbiz</h2>
         </Reveal>
         <FeatureGrid
           columns={4}
@@ -225,9 +195,9 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- */}
       {/* Section 4 — Services overview */}
       {/* ---------------------------------------------------------------- */}
-      <Section variant="soft">
+      <Section surface="white">
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">What We Do</h2>
+          <h2 className="text-h2">What We Do</h2>
         </Reveal>
         <RevealGroup as="ul" className="grid gap-6 md:grid-cols-3">
           {services.map((service) => (
@@ -236,7 +206,7 @@ export default function HomePage() {
                 href={service.href}
                 className="group flex h-full flex-col rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
               >
-                <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-green/10 text-green">
+                <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-peach-tile text-glow shadow-glow-tile">
                   <service.icon className="h-6 w-6" aria-hidden="true" />
                 </span>
                 <h3 className="text-lg font-semibold text-navy">{service.title}</h3>
@@ -263,9 +233,9 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- */}
       {/* Section 5 — How it works */}
       {/* ---------------------------------------------------------------- */}
-      <Section>
+      <Section surface="grey">
         <Reveal kind="blur" className="mb-12 text-center">
-          <h2 className="text-h2 font-bold">How Going Solar Works</h2>
+          <h2 className="text-h2">How Going Solar Works</h2>
         </Reveal>
         <ProcessTimeline
           steps={steps.map((s) => ({
@@ -279,9 +249,9 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- */}
       {/* Section 6 — Brands we install */}
       {/* ---------------------------------------------------------------- */}
-      <Section variant="soft">
+      <Section surface="white">
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">Trusted Components</h2>
+          <h2 className="text-h2">Trusted Components</h2>
         </Reveal>
         <BrandMarquee />
         <p className="mx-auto mt-8 max-w-2xl text-center text-grey">
@@ -293,14 +263,14 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- */}
       {/* Section 7 — Subsidy teaser */}
       {/* ---------------------------------------------------------------- */}
-      <Section>
+      <Section surface="grey">
         <Reveal kind="confident" className="overflow-hidden rounded-card bg-cta-gradient px-6 py-12 text-center text-white shadow-card md:px-12 md:py-16">
           {/*
             NOTE: The ₹78,000 figure must be verified against current government
             guidelines (PM Surya Ghar: Muft Bijli Yojana) before launch.
             Kept here as a single editable string for easy updating.
           */}
-          <h2 className="text-h2 font-bold text-white">Get Up to ₹78,000 in Government Subsidy</h2>
+          <h2 className="text-h2 text-white">Get Up to ₹78,000 in Government Subsidy</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/90">
             Homeowners can claim a rooftop solar subsidy under the PM Surya Ghar: Muft Bijli Yojana.
             Quadbiz handles the entire application for you.
@@ -322,10 +292,10 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- */}
       {/* Section 9 — Lead form */}
       {/* ---------------------------------------------------------------- */}
-      <Section id="quote" variant="soft">
+      <Section id="quote" surface="white">
         <div className="mx-auto max-w-2xl">
           <Reveal className="mb-8 text-center">
-            <h2 className="text-h2 font-bold">Get Your Free Solar Quote</h2>
+            <h2 className="text-h2">Get Your Free Solar Quote</h2>
             <p className="mt-3 text-grey">
               Tell us a bit about your property and we&rsquo;ll call you within 24 hours.
             </p>

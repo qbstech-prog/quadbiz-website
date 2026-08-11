@@ -48,10 +48,10 @@ export default function BlogListPage() {
       <section className="bg-bg-soft">
         <div className="mx-auto max-w-container px-4 py-14 sm:px-6 md:py-20 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-orange">
+            <p className="text-sm font-semibold font-heading uppercase tracking-[0.15em] text-orange">
               Resources
             </p>
-            <h1 className="mt-4 text-h1 font-bold text-navy">Solar Guides &amp; Insights</h1>
+            <h1 className="mt-4 text-h1 text-navy">Solar Guides &amp; Insights</h1>
             <p className="mt-5 text-lg leading-body text-grey">
               Plain-language guides on solar costs, subsidies, net metering and more — written for
               Tamil Nadu homeowners, businesses and farmers.

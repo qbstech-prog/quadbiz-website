@@ -107,14 +107,14 @@ export default function AgriculturalSolarPage() {
         />
       ))}
 
-      {/* Section 1 — Hero (green eco lean) */}
+      {/* Section 1 — Hero */}
       <section className="bg-bg-soft">
         <div className="mx-auto max-w-container px-4 py-16 sm:px-6 md:py-20 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-green">
+            <p className="text-sm font-semibold font-heading uppercase tracking-[0.15em] text-orange">
               Agricultural
             </p>
-            <h1 className="mt-4 text-h1 font-bold text-navy">
+            <h1 className="mt-4 text-h1 text-navy">
               Agricultural Solar &amp; Solar Water Pumps in Tamil Nadu
             </h1>
             <p className="mt-5 text-lg leading-body text-grey">
@@ -139,7 +139,7 @@ export default function AgriculturalSolarPage() {
       {/* Section 2 — Solutions */}
       <Section>
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">Solar Solutions for Your Farm</h2>
+          <h2 className="text-h2">Solar Solutions for Your Farm</h2>
         </Reveal>
         <FeatureGrid
           columns={3}
@@ -154,7 +154,7 @@ export default function AgriculturalSolarPage() {
       {/* Section 3 — Why farmers go solar */}
       <Section variant="soft">
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">Why Farmers Choose Solar</h2>
+          <h2 className="text-h2">Why Farmers Choose Solar</h2>
         </Reveal>
         <RevealGroup as="ul" className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map((benefit) => (
@@ -163,7 +163,7 @@ export default function AgriculturalSolarPage() {
               key={benefit.text}
               className="flex items-center gap-3 rounded-card border border-black/5 bg-white p-5 shadow-soft"
             >
-              <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-green/10 text-green">
+              <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-peach-tile text-glow shadow-glow-tile">
                 <benefit.icon className="h-5 w-5" aria-hidden="true" />
               </span>
               <span className="font-medium text-navy">{benefit.text}</span>
@@ -172,7 +172,7 @@ export default function AgriculturalSolarPage() {
         </RevealGroup>
       </Section>
 
-      {/* Section 4 — PM-KUSUM note (green accent band) */}
+      {/* Section 4 — PM-KUSUM note (orange accent band) */}
       {/*
         NOTE: PM-KUSUM eligibility/subsidy rules vary by state and year — keep
         this copy general and verify specifics before making any firm claims.
@@ -180,12 +180,12 @@ export default function AgriculturalSolarPage() {
       <Section>
         <Reveal
           kind="confident"
-          className="overflow-hidden rounded-card border border-green/30 bg-green/10 px-6 py-12 text-center md:px-12"
+          className="overflow-hidden rounded-card border border-orange/30 bg-orange/10 px-6 py-12 text-center md:px-12"
         >
-          <span className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-green text-white">
+          <span className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-orange text-white">
             <Sprout className="h-7 w-7" aria-hidden="true" />
           </span>
-          <h2 className="text-h2 font-bold">PM-KUSUM Scheme Support</h2>
+          <h2 className="text-h2">PM-KUSUM Scheme Support</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-ink">
             The PM-KUSUM scheme supports farmers with standalone solar pumps and grid-connected
             agricultural solar. Eligibility and subsidy levels vary — Quadbiz helps you check
@@ -200,7 +200,7 @@ export default function AgriculturalSolarPage() {
       {/* Section 5 — FAQ */}
       <Section variant="soft">
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">Agricultural Solar — Frequently Asked Questions</h2>
+          <h2 className="text-h2">Agricultural Solar — Frequently Asked Questions</h2>
         </Reveal>
         <FAQ items={faqs} />
       </Section>
@@ -209,7 +209,7 @@ export default function AgriculturalSolarPage() {
       <Section id="quote">
         <div className="mx-auto max-w-2xl">
           <Reveal className="mb-8 text-center">
-            <h2 className="text-h2 font-bold">Get a Free Farm Site Survey</h2>
+            <h2 className="text-h2">Get a Free Farm Site Survey</h2>
             <p className="mt-3 text-grey">
               Tell us about your farm and we&rsquo;ll call you within 24 hours.
             </p>

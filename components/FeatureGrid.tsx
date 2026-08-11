@@ -38,13 +38,13 @@ export default function FeatureGrid({
           key={item.title}
           className={`group flex w-full flex-col items-start ${widthClass}`}
         >
-          <span className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-orange/10 text-orange shadow-soft transition-all duration-200 group-hover:-translate-y-1 group-hover:shadow-lift">
+          <span className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-peach-tile text-glow shadow-glow-tile transition-shadow duration-200 group-hover:shadow-[0_10px_24px_rgba(255,106,44,0.28)] motion-safe:transition-[box-shadow,transform] motion-safe:group-hover:-translate-y-0.5">
             {item.icon}
           </span>
           <h3 className="text-lg font-semibold text-navy [hyphens:none] [text-wrap:balance]">
             {item.title}
           </h3>
-          <span className="mt-2 block h-[3px] w-10 rounded-full bg-orange" aria-hidden="true" />
+          <span className="mt-3 block h-[3px] w-10 rounded-full bg-glow" aria-hidden="true" />
           <p className="mt-3 text-grey">{item.body}</p>
         </RevealItem>
       ))}

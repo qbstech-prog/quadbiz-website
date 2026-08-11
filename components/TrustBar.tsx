@@ -19,7 +19,7 @@ export default function TrustBar({ className = "" }: { className?: string }) {
     <div className={`bg-white ${className}`}>
       <RevealGroup
         as="ul"
-        className="mx-auto flex max-w-container flex-wrap items-center justify-center gap-2.5 px-4 py-6 sm:px-6 lg:px-8"
+        className="mx-auto flex max-w-container flex-wrap items-center justify-center gap-2.5 px-4 pb-6 pt-3 sm:px-6 lg:px-8"
       >
         {TRUST_POINTS.map((point) => (
           <RevealItem
@@ -27,7 +27,7 @@ export default function TrustBar({ className = "" }: { className?: string }) {
             key={point}
             className="inline-flex items-center gap-1.5 rounded-full border border-black/5 bg-white px-3.5 py-1.5 text-sm font-medium text-navy shadow-soft"
           >
-            <BadgeCheck className="h-4 w-4 flex-shrink-0 text-green" aria-hidden="true" />
+            <BadgeCheck className="h-4 w-4 flex-shrink-0 text-orange" aria-hidden="true" />
             {point}
           </RevealItem>
         ))}

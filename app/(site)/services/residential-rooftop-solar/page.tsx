@@ -140,10 +140,10 @@ export default function ResidentialSolarPage() {
       <section className="bg-bg-soft">
         <div className="mx-auto max-w-container px-4 py-16 sm:px-6 md:py-20 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-orange">
+            <p className="text-sm font-semibold font-heading uppercase tracking-[0.15em] text-orange">
               Residential
             </p>
-            <h1 className="mt-4 text-h1 font-bold text-navy">Rooftop Solar for Homes in Madurai</h1>
+            <h1 className="mt-4 text-h1 text-navy">Rooftop Solar for Homes in Madurai</h1>
             <p className="mt-5 text-lg leading-body text-grey">
               Turn your roof into a power plant. A rooftop solar system from Quadbiz can bring your
               monthly TANGEDCO bill close to zero while adding value to your home — and with the PM
@@ -166,7 +166,7 @@ export default function ResidentialSolarPage() {
       {/* Section 2 — System types */}
       <Section>
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">Choose the Right System for Your Home</h2>
+          <h2 className="text-h2">Choose the Right System for Your Home</h2>
         </Reveal>
         <FeatureGrid
           columns={3}
@@ -181,7 +181,7 @@ export default function ResidentialSolarPage() {
       {/* Section 3 — What's included */}
       <Section variant="soft">
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">Everything Handled Under One Roof</h2>
+          <h2 className="text-h2">Everything Handled Under One Roof</h2>
         </Reveal>
         <RevealGroup as="ul" className="mx-auto grid max-w-4xl gap-3 sm:grid-cols-2">
           {included.map((item) => (
@@ -190,7 +190,7 @@ export default function ResidentialSolarPage() {
               key={item}
               className="flex items-start gap-3 rounded-card border border-black/5 bg-white p-4 shadow-soft"
             >
-              <Check className="mt-0.5 h-5 w-5 flex-shrink-0 text-green" aria-hidden="true" />
+              <Check className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange" aria-hidden="true" />
               <span className="text-ink">{item}</span>
             </RevealItem>
           ))}
@@ -200,7 +200,7 @@ export default function ResidentialSolarPage() {
       {/* Section 4 — Benefits */}
       <Section>
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">Why Homeowners Go Solar</h2>
+          <h2 className="text-h2">Why Homeowners Go Solar</h2>
         </Reveal>
         <RevealGroup as="ul" className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map((benefit) => (
@@ -209,7 +209,7 @@ export default function ResidentialSolarPage() {
               key={benefit.text}
               className="flex items-center gap-3 rounded-card border border-black/5 bg-white p-5 shadow-soft"
             >
-              <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-green/10 text-green">
+              <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-peach-tile text-glow shadow-glow-tile">
                 <benefit.icon className="h-5 w-5" aria-hidden="true" />
               </span>
               <span className="font-medium text-navy">
@@ -229,7 +229,7 @@ export default function ResidentialSolarPage() {
       {/* Section 5 — Sizing guide */}
       <Section variant="soft">
         <Reveal kind="blur" className="mb-8 text-center">
-          <h2 className="text-h2 font-bold">What Size System Do You Need?</h2>
+          <h2 className="text-h2">What Size System Do You Need?</h2>
         </Reveal>
         <div className="mx-auto max-w-3xl overflow-x-auto">
           <table className="w-full border-collapse overflow-hidden rounded-card border border-black/10 text-left">
@@ -270,7 +270,7 @@ export default function ResidentialSolarPage() {
       {/* Section 6 — FAQ */}
       <Section>
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">Rooftop Solar — Frequently Asked Questions</h2>
+          <h2 className="text-h2">Rooftop Solar — Frequently Asked Questions</h2>
         </Reveal>
         <FAQ items={faqs} />
       </Section>
@@ -279,7 +279,7 @@ export default function ResidentialSolarPage() {
       <Section id="quote" variant="soft">
         <div className="mx-auto max-w-2xl">
           <Reveal className="mb-8 text-center">
-            <h2 className="text-h2 font-bold">Get Your Free Rooftop Solar Quote</h2>
+            <h2 className="text-h2">Get Your Free Rooftop Solar Quote</h2>
             <p className="mt-3 text-grey">
               Tell us about your home and we&rsquo;ll call you within 24 hours.
             </p>

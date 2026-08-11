@@ -92,7 +92,7 @@ function ServicesDropdown({ item, pathname }: { item: NavItem; pathname: string 
           <li key={child.href}>
             <Link
               href={child.href}
-              className={`block rounded-md px-3 py-2 text-sm transition-colors hover:bg-bg-soft hover:text-orange ${
+              className={`block rounded-md px-3 py-2 text-sm transition-colors hover:bg-[#F7F7F8] hover:text-orange ${
                 isActive(pathname, child.href) ? "text-orange" : "text-ink"
               }`}
             >
@@ -153,7 +153,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav aria-label="Primary" className="hidden lg:block">
+        <nav aria-label="Primary" className="hidden font-heading lg:block">
           <ul className="flex items-center gap-1">
             {nav.map((item) =>
               item.children ? (
@@ -209,7 +209,7 @@ export default function Header() {
         hidden={!mobileOpen}
         className="border-t border-black/5 bg-white lg:hidden"
       >
-        <nav aria-label="Mobile" className="mx-auto max-w-container px-4 py-4 sm:px-6">
+        <nav aria-label="Mobile" className="mx-auto max-w-container px-4 py-4 font-heading sm:px-6">
           <ul className="flex flex-col gap-1">
             {nav.map((item) =>
               item.children ? (

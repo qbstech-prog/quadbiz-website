@@ -97,7 +97,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       <section className="bg-bg-soft">
         <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
           <p className="text-sm">
-            <Link href="/blog" className="font-medium text-green hover:underline">
+            <Link href="/blog" className="font-medium text-orange hover:underline">
               ← All guides
             </Link>
           </p>
@@ -106,7 +106,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           >
             {post.category}
           </span>
-          <h1 className="mt-4 text-h1 font-bold text-navy">{post.title}</h1>
+          <h1 className="mt-4 text-h1 text-navy">{post.title}</h1>
           <p className="mt-4 text-sm text-grey">
             By {post.author} · {formatPostDate(post.publishedAt)}
           </p>

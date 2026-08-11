@@ -9,16 +9,23 @@ const stats = [
   { value: 100, suffix: "%", label: "MNRE Compliant" },
 ];
 
-/** Navy stats band used on the Home and About pages. Numbers count up on view. */
+/**
+ * Dark punctuation band (near-black) — white numbers, muted labels, thin orange
+ * dividers between stats. One strong break between the sections above and below.
+ * Counts up on view. Shared by Home and About.
+ */
 export default function StatsStrip() {
   return (
-    <Section variant="navy">
-      <dl className="grid grid-cols-2 gap-8 text-center lg:grid-cols-4">
+    <Section surface="dark">
+      <dl className="grid grid-cols-2 gap-y-12 sm:grid-cols-4 sm:gap-y-0 sm:divide-x sm:divide-glow/25">
         {stats.map((stat) => (
-          <div key={stat.label} className="flex flex-col-reverse">
+          <div
+            key={stat.label}
+            className="flex flex-col-reverse px-2 text-center sm:px-6"
+          >
             {/* dt precedes dd in the DOM; flex-col-reverse shows the number on top. */}
-            <dt className="mt-1 text-sm text-white/80">{stat.label}</dt>
-            <dd className="font-display text-4xl font-bold text-amber md:text-5xl">
+            <dt className="mt-2 text-sm text-muted-dark">{stat.label}</dt>
+            <dd className="text-4xl font-semibold tracking-[-0.03em] text-white md:text-5xl">
               <Counter value={stat.value} suffix={stat.suffix} />
             </dd>
           </div>

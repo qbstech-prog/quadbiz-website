@@ -77,10 +77,10 @@ export default function ProjectsPage() {
       <section className="bg-bg-soft">
         <div className="mx-auto max-w-container px-4 py-16 sm:px-6 md:py-20 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-orange">
+            <p className="text-sm font-semibold font-heading uppercase tracking-[0.15em] text-orange">
               Our Work
             </p>
-            <h1 className="mt-4 text-h1 font-bold text-navy">
+            <h1 className="mt-4 text-h1 text-navy">
               Our Solar Projects Across Tamil Nadu
             </h1>
             <p className="mt-5 text-lg leading-body text-grey">
@@ -95,7 +95,7 @@ export default function ProjectsPage() {
       {/* Section 2 — Projects grid OR honest empty state */}
       <Section>
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">Featured Installations</h2>
+          <h2 className="text-h2">Featured Installations</h2>
         </Reveal>
 
         {hasProjects ? (
@@ -127,7 +127,7 @@ export default function ProjectsPage() {
       {/* Section 3 — Categories mini-links (always show) */}
       <Section variant="soft">
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">Explore What We Install</h2>
+          <h2 className="text-h2">Explore What We Install</h2>
         </Reveal>
         <RevealGroup as="ul" className="grid gap-6 md:grid-cols-3">
           {categories.map((category) => (
@@ -136,7 +136,7 @@ export default function ProjectsPage() {
                 href={category.href}
                 className="group flex h-full items-center gap-4 rounded-card border border-black/5 bg-white p-6 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
               >
-                <span className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-orange/10 text-orange">
+                <span className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-peach-tile text-glow shadow-glow-tile">
                   <category.icon className="h-6 w-6" aria-hidden="true" />
                 </span>
                 <span className="font-semibold text-navy">{category.label}</span>
@@ -156,7 +156,7 @@ export default function ProjectsPage() {
       <Section id="quote">
         <div className="mx-auto max-w-2xl">
           <Reveal className="mb-8 text-center">
-            <h2 className="text-h2 font-bold">Want Results Like These?</h2>
+            <h2 className="text-h2">Want Results Like These?</h2>
             <p className="mt-3 text-grey">
               Get a free site survey and a fixed quote — we&rsquo;ll call you within 24 hours.
             </p>

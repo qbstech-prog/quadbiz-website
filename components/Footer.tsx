@@ -34,20 +34,20 @@ export default function Footer() {
             height={90}
             className="mb-4 h-14 w-auto rounded-lg bg-white p-2"
           />
-          <p className="font-display text-lg font-semibold text-white">{site.tagline}</p>
+          <p className="font-heading text-lg font-semibold text-white">{site.tagline}</p>
           <p className="mt-3 text-sm leading-relaxed">
             End-to-end solar installation for homes, businesses and farms across Tamil Nadu — from
             site survey to subsidy paperwork and after-sales service.
           </p>
-          <span className="mt-4 inline-flex items-center gap-2 rounded-full border border-green/50 bg-green/15 px-3 py-1 text-xs font-semibold text-white">
-            <span aria-hidden="true" className="h-2 w-2 rounded-full bg-green" />
+          <span className="mt-4 inline-flex items-center gap-2 rounded-full border border-orange/50 bg-orange/15 px-3 py-1 text-xs font-semibold text-white">
+            <span aria-hidden="true" className="h-2 w-2 rounded-full bg-orange" />
             MNRE Registered
           </span>
         </div>
 
         {/* Quick links */}
         <nav aria-label="Quick links">
-          <h2 className="mb-4 font-display text-sm font-semibold uppercase tracking-wide text-white">
+          <h2 className="mb-4 font-heading text-sm font-semibold uppercase tracking-wide text-white">
             Quick Links
           </h2>
           <ul className="space-y-2 text-sm">
@@ -66,7 +66,7 @@ export default function Footer() {
 
         {/* Services */}
         <nav aria-label="Services">
-          <h2 className="mb-4 font-display text-sm font-semibold uppercase tracking-wide text-white">
+          <h2 className="mb-4 font-heading text-sm font-semibold uppercase tracking-wide text-white">
             Services
           </h2>
           <ul className="space-y-2 text-sm">
@@ -85,7 +85,7 @@ export default function Footer() {
 
         {/* Contact / NAP */}
         <div>
-          <h2 className="mb-4 font-display text-sm font-semibold uppercase tracking-wide text-white">
+          <h2 className="mb-4 font-heading text-sm font-semibold uppercase tracking-wide text-white">
             Contact
           </h2>
           <address className="space-y-3 text-sm not-italic leading-relaxed">

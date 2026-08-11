@@ -48,7 +48,7 @@ export default function SubsidyCalculator({ onGetQuote }: SubsidyCalculatorProps
           <label htmlFor="bill-slider" className="text-sm font-medium text-navy">
             Your average monthly electricity bill
           </label>
-          <span className="font-display text-2xl font-bold text-navy">{formatINR(bill)}</span>
+          <span className="font-heading text-2xl font-bold text-navy">{formatINR(bill)}</span>
         </div>
         <input
           id="bill-slider"
@@ -58,7 +58,7 @@ export default function SubsidyCalculator({ onGetQuote }: SubsidyCalculatorProps
           step={100}
           value={bill}
           onChange={(e) => setBill(Number(e.target.value))}
-          className="mt-3 h-3 w-full cursor-pointer appearance-none rounded-full bg-bg-soft accent-orange"
+          className="mt-3 h-3 w-full cursor-pointer appearance-none rounded-full bg-[#F0F0F2] accent-glow"
           aria-describedby="bill-slider-hint"
         />
         <div id="bill-slider-hint" className="mt-1 flex justify-between text-xs text-grey">
@@ -143,10 +143,10 @@ function Output({
   return (
     <div
       className={`rounded-xl p-4 text-center ${
-        highlight ? "bg-orange/10" : "bg-bg-soft"
+        highlight ? "bg-[#FFF1EA]" : "bg-[#F5F5F7]"
       }`}
     >
-      <dd className={`font-display text-xl font-bold sm:text-2xl ${highlight ? "text-orange" : "text-navy"}`}>
+      <dd className={`text-xl font-semibold sm:text-2xl ${highlight ? "text-orange" : "text-navy"}`}>
         {value}
       </dd>
       <dt className="mt-1 text-xs text-grey">{label}</dt>

@@ -46,7 +46,7 @@ export default async function Reviews() {
   return (
     <Section id="reviews" variant="soft">
       <div className="mb-10 text-center">
-        <h2 className="text-h2 font-bold">What Our Customers Say</h2>
+        <h2 className="text-h2">What Our Customers Say</h2>
       </div>
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {reviews.map((review, index) => (

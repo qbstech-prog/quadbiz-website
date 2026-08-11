@@ -18,7 +18,7 @@ import {
 import FAQ, { type FaqItem } from "@/components/FAQ";
 import FeatureGrid from "@/components/FeatureGrid";
 import LeadForm from "@/components/LeadForm";
-import ProcessTimeline from "@/components/ProcessTimeline";
+import ProcessStepper from "@/components/ProcessStepper";
 import Reveal from "@/components/motion/Reveal";
 import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
@@ -141,10 +141,10 @@ export default function CommercialSolarPage() {
       <section className="bg-bg-soft">
         <div className="mx-auto max-w-container px-4 py-16 sm:px-6 md:py-20 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-orange">
+            <p className="text-sm font-semibold font-heading uppercase tracking-[0.15em] text-orange">
               Commercial &amp; Industrial
             </p>
-            <h1 className="mt-4 text-h1 font-bold text-navy">
+            <h1 className="mt-4 text-h1 text-navy">
               Commercial &amp; Industrial Solar in Tamil Nadu
             </h1>
             <p className="mt-5 text-lg leading-body text-grey">
@@ -167,9 +167,9 @@ export default function CommercialSolarPage() {
       </section>
 
       {/* Section 2 — Ideal for */}
-      <Section>
+      <Section surface="grey">
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">Built for Every Kind of Business</h2>
+          <h2 className="text-h2">Built for Every Kind of Business</h2>
         </Reveal>
         <RevealGroup as="ul" className="mx-auto flex max-w-4xl flex-wrap justify-center gap-3">
           {idealFor.map((item) => (
@@ -185,9 +185,9 @@ export default function CommercialSolarPage() {
       </Section>
 
       {/* Section 3 — Why commercial solar */}
-      <Section variant="soft">
+      <Section surface="white">
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">Why Businesses Switch to Solar</h2>
+          <h2 className="text-h2">Why Businesses Switch to Solar</h2>
         </Reveal>
         <FeatureGrid
           columns={3}
@@ -199,12 +199,13 @@ export default function CommercialSolarPage() {
         />
       </Section>
 
-      {/* Section 4 — Turnkey process */}
-      <Section>
+      {/* Section 4 — Turnkey process (dark punctuation; vertical stepper shape) */}
+      <Section surface="dark">
         <Reveal kind="blur" className="mb-12 text-center">
-          <h2 className="text-h2 font-bold">Our Turnkey Process</h2>
+          <h2 className="text-h2">Our Turnkey Process</h2>
         </Reveal>
-        <ProcessTimeline
+        <ProcessStepper
+          tone="dark"
           steps={process.map((step) => ({
             title: step.title,
             icon: <step.icon className="h-4 w-4" aria-hidden="true" />,
@@ -213,18 +214,18 @@ export default function CommercialSolarPage() {
       </Section>
 
       {/* Section 5 — FAQ */}
-      <Section variant="soft">
+      <Section surface="grey">
         <Reveal kind="blur" className="mb-10 text-center">
-          <h2 className="text-h2 font-bold">Commercial Solar — Frequently Asked Questions</h2>
+          <h2 className="text-h2">Commercial Solar — Frequently Asked Questions</h2>
         </Reveal>
         <FAQ items={faqs} />
       </Section>
 
       {/* Section 6 — Lead form */}
-      <Section id="quote">
+      <Section id="quote" surface="white">
         <div className="mx-auto max-w-2xl">
           <Reveal className="mb-8 text-center">
-            <h2 className="text-h2 font-bold">Request a Commercial Solar Assessment</h2>
+            <h2 className="text-h2">Request a Commercial Solar Assessment</h2>
             <p className="mt-3 text-grey">
               Tell us about your business and we&rsquo;ll call you within 24 hours.
             </p>
@@ -234,7 +235,7 @@ export default function CommercialSolarPage() {
       </Section>
 
       {/* Related services */}
-      <Section variant="soft">
+      <Section surface="grey">
         <p className="text-center text-grey">
           Related services:{" "}
           <Link href="/services/residential-rooftop-solar" className="link-eco">

@@ -94,7 +94,7 @@ export function categoryAccent(category: string): { text: string; bg: string; fr
     case "How-To":
       return { text: "text-navy", bg: "bg-navy/10", from: "from-navy/20" };
     case "Agricultural":
-      return { text: "text-green", bg: "bg-green/10", from: "from-green/25" };
+      return { text: "text-orange", bg: "bg-orange/10", from: "from-orange/25" };
     case "Cost & Savings":
     default:
       return { text: "text-orange", bg: "bg-orange/10", from: "from-orange/25" };

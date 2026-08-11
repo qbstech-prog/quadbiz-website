@@ -59,7 +59,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
             </RevealImage>
             <div className="p-5">
               <div className="mb-2 flex items-center gap-2">
-                <span className="rounded-full bg-green/10 px-2.5 py-1 text-xs font-semibold text-green">
+                <span className="rounded-full bg-orange/10 px-2.5 py-1 text-xs font-semibold text-orange">
                   {project.category}
                 </span>
                 <span className="text-xs font-medium text-grey">{project.systemSizeKw} kW</span>

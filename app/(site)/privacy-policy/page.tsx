@@ -27,7 +27,7 @@ export default function PrivacyPolicyPage() {
   return (
     <Section>
       <div className="legal mx-auto max-w-3xl">
-        <h1 className="text-h1 font-bold text-navy">Privacy Policy</h1>
+        <h1 className="text-h1 text-navy">Privacy Policy</h1>
         <p className="mt-2 text-sm text-grey">Last updated: {EFFECTIVE_DATE}</p>
 
         <p>

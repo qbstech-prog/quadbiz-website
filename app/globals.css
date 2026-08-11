@@ -7,20 +7,23 @@
    reference the same values via var(--brand-*).
    ------------------------------------------------------------------------- */
 :root {
-  --brand-navy: #21395c;
-  --brand-orange: #ff6b35;
-  --brand-amber: #f7931e;
-  --brand-green: #6ba542;
-  --brand-ink: #1a1a1a;
-  --brand-grey: #5b6472;
-  --brand-bg-soft: #f5f7fa;
+  --brand-navy: #1d1d1f; /* headings + primary (near-black) */
+  --brand-ink: #1d1d1f;
+  --brand-grey: #494b4e; /* secondary text */
+  --brand-muted: #86868b; /* captions */
+  --brand-orange: #c2410c; /* text-safe accent (AA on white & grey) */
+  --brand-glow: #ff6a2c; /* bright accent for fills */
+  --brand-line: #ebebed; /* hairline separators */
+  --brand-bg-soft: #ffffff; /* pure white */
   --brand-white: #ffffff;
 
-  --cta-gradient: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  --cta-gradient: linear-gradient(135deg, #ff7a3c 0%, #ff5e1e 100%);
 
-  /* next/font injects these; fall back to system fonts if unavailable. */
-  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  /* Inter, injected by next/font; single family for everything. */
+  --font: "Inter", system-ui, sans-serif;
+  --font-display: var(--font);
+  --font-heading: var(--font);
+  --font-body: var(--font);
 }
 
 @layer base {
@@ -32,24 +35,35 @@
   body {
     background-color: var(--brand-white);
     color: var(--brand-ink);
-    font-family: var(--font-body);
-    line-height: 1.7;
+    font-family: var(--font);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
 
+  /* All headings — Inter, semibold, tight tracking, near-black. Never > 700. */
   h1,
   h2,
-  h3 {
-    font-family: var(--font-display);
+  h3,
+  h4 {
+    font-family: var(--font);
+    font-weight: 600;
     color: var(--brand-navy);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     text-wrap: balance;
+    hyphens: none;
+  }
+
+  /* Dark surface: headings flip to white (base rule pins them near-black). */
+  .surface-dark :is(h1, h2, h3, h4) {
+    color: #fff;
   }
 
   /* Visible, consistent keyboard focus everywhere. */
   :focus-visible {
-    outline: 3px solid var(--brand-amber);
+    outline: 3px solid var(--brand-glow);
     outline-offset: 2px;
     border-radius: 4px;
   }
@@ -60,34 +74,43 @@
   }
 
   ::selection {
-    background-color: rgba(255, 107, 53, 0.2);
+    background-color: rgba(255, 106, 44, 0.18);
     color: var(--brand-navy);
   }
 }
 
 @layer components {
-  /* Primary CTA — orange→amber gradient. */
+  /* Primary CTA — glowing orange gradient pill. */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-sans font-semibold text-white shadow-card transition-all duration-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-medium text-white shadow-glow-btn transition-all duration-200;
     background-image: var(--cta-gradient);
   }
   .btn-primary:hover {
-    @apply shadow-card-hover;
-    filter: brightness(1.05);
-    transform: translateY(-1px);
+    @apply shadow-glow-btn-hover;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .btn-primary:hover {
+      transform: translateY(-1px);
+    }
   }
 
-  /* Secondary — navy outline. */
+  /* Secondary — quiet text link with a chevron. */
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-navy px-6 py-3 font-sans font-semibold text-navy transition-all duration-200;
+    @apply inline-flex items-center gap-1 font-medium text-ink transition-colors duration-200;
+  }
+  .btn-secondary::after {
+    content: "›";
+    @apply text-orange;
+    font-size: 1.15em;
+    line-height: 1;
   }
   .btn-secondary:hover {
-    @apply bg-navy text-white;
+    @apply text-orange;
   }
 
-  /* Eco / secondary accent link. */
+  /* Secondary accent link — orange is the site's only accent. */
   .link-eco {
-    @apply font-semibold text-green underline-offset-4 hover:underline;
+    @apply font-semibold text-orange underline-offset-4 hover:underline;
   }
 
   /* Readable long-form prose for legal / policy pages. */
@@ -104,7 +127,7 @@
     @apply mt-4 list-disc space-y-2 pl-6 leading-body text-grey;
   }
   .legal a {
-    @apply font-medium text-green underline underline-offset-4;
+    @apply font-medium text-orange underline underline-offset-4;
   }
   .legal strong {
     @apply font-semibold text-ink;
@@ -133,7 +156,7 @@
     @apply mt-4 list-decimal space-y-2 pl-6 leading-body text-grey;
   }
   .prose a {
-    @apply font-medium text-green underline underline-offset-4;
+    @apply font-medium text-orange underline underline-offset-4;
   }
   .prose strong {
     @apply font-semibold text-ink;
@@ -207,7 +230,7 @@
   height: 2px;
   width: 1.75rem;
   border-radius: 2px;
-  background: var(--brand-orange);
+  background: var(--brand-glow);
 }
 
 /* -------------------------------------------------------------------------
@@ -234,13 +257,13 @@
 .timeline-fill-h {
   position: absolute;
   inset: 0;
-  background: var(--brand-orange);
+  background: var(--brand-glow);
   transform-origin: left;
 }
 .timeline-fill-v {
   position: absolute;
   inset: 0;
-  background: var(--brand-orange);
+  background: var(--brand-glow);
   transform-origin: top;
 }
 @media (min-width: 768px) {
@@ -342,7 +365,7 @@
 .ptl-fill-v {
   position: absolute;
   inset: 0;
-  background: var(--brand-orange);
+  background: var(--brand-glow);
   transform-origin: top;
 }
 .ptl-connector {
@@ -358,7 +381,7 @@
 .ptl-connector-fill {
   position: absolute;
   inset: 0;
-  background: var(--brand-orange);
+  background: var(--brand-glow);
   transform-origin: left;
 }
 @media (min-width: 768px) {

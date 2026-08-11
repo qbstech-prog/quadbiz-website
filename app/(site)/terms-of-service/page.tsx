@@ -20,7 +20,7 @@ export default function TermsOfServicePage() {
   return (
     <Section>
       <div className="legal mx-auto max-w-3xl">
-        <h1 className="text-h1 font-bold text-navy">Terms of Service</h1>
+        <h1 className="text-h1 text-navy">Terms of Service</h1>
         <p className="mt-2 text-sm text-grey">Last updated: {EFFECTIVE_DATE}</p>
 
         <p>
