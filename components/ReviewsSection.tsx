@@ -48,7 +48,12 @@ function Avatar({ review }: { review: Review }) {
  * key configured, getReviews() returns empty, so the section is hidden and no
  * placeholder reviews are ever shown. Shared by Home and the Contact page.
  */
-export default async function ReviewsSection() {
+export default async function ReviewsSection({
+  innerClassName = "",
+}: {
+  /** Extra classes on the Section's inner container (e.g. tighten top padding). */
+  innerClassName?: string;
+} = {}) {
   const data = await getReviews();
 
   // Once live: 2+ real reviews → show; 0–1 → hide. (Sample set has 3 in dev.)
@@ -59,7 +64,7 @@ export default async function ReviewsSection() {
     !data.isSample && data.reviews.length >= 2 && data.overallRating != null;
 
   return (
-    <Section id="reviews" surface="grey">
+    <Section id="reviews" surface="grey" innerClassName={innerClassName}>
       {emitSchema && data.overallRating != null && (
         <script
           type="application/ld+json"

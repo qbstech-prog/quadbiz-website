@@ -15,6 +15,7 @@ import {
   Zap,
   Phone,
   BadgeCheck,
+  Check,
 } from "lucide-react";
 
 import BrandMarquee from "@/components/BrandMarquee";
@@ -288,9 +289,9 @@ export default function HomePage() {
       </Section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Section 7 — Subsidy teaser */}
+      {/* Section 7 — Subsidy teaser (bottom padding tightened toward the reviews) */}
       {/* ---------------------------------------------------------------- */}
-      <Section surface="grey">
+      <Section surface="grey" innerClassName="!pb-10 md:!pb-14">
         <Reveal kind="confident" className="overflow-hidden rounded-card bg-cta-gradient px-6 py-12 text-center text-white shadow-card md:px-12 md:py-16">
           {/*
             NOTE: The ₹78,000 figure must be verified against current government
@@ -312,22 +313,57 @@ export default function HomePage() {
       </Section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Section 8 — Reviews (renders null until Google Places is wired) */}
+      {/* Section 8 — Reviews (renders null until Google Places is wired).
+          Top padding tightened so it sits closer to the CTA band above. */}
       {/* ---------------------------------------------------------------- */}
-      <ReviewsSection />
+      <ReviewsSection innerClassName="!pt-10 md:!pt-14" />
 
       {/* ---------------------------------------------------------------- */}
-      {/* Section 9 — Lead form */}
+      {/* Section 9 — Lead form (two-column: form left, installation photo right) */}
       {/* ---------------------------------------------------------------- */}
       <Section id="quote" surface="white">
-        <div className="mx-auto max-w-2xl">
-          <Reveal className="mb-8 text-center">
-            <h2 className="text-h2">Get Your Free Solar Quote</h2>
-            <p className="mt-3 text-grey">
-              Tell us a bit about your property and we&rsquo;ll call you within 24 hours.
-            </p>
-          </Reveal>
-          <LeadForm source="home-quote" />
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+          {/* Left — heading, existing form (unchanged), trust cues. */}
+          <div>
+            <Reveal className="mb-6">
+              <h2 className="text-h2">Get Your Free Solar Quote</h2>
+              <p className="mt-3 text-grey">Get a personalized solar quote in minutes.</p>
+            </Reveal>
+            <LeadForm source="home-quote" />
+            {/* Trust cues (orange checks). No rating/customer-count line — Quadbiz
+                has no verified rating yet; any rating must come from real Google data. */}
+            <ul className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium text-grey">
+              <li className="inline-flex items-center gap-1.5">
+                <Check className="h-4 w-4 flex-shrink-0 text-orange" aria-hidden="true" />
+                No spam, ever
+              </li>
+              <li className="inline-flex items-center gap-1.5">
+                <Check className="h-4 w-4 flex-shrink-0 text-orange" aria-hidden="true" />
+                100% Free consultation
+              </li>
+              <li className="inline-flex items-center gap-1.5">
+                <Check className="h-4 w-4 flex-shrink-0 text-orange" aria-hidden="true" />
+                Govt. subsidy help
+              </li>
+            </ul>
+          </div>
+
+          {/* Right — real installation photo. Hidden on mobile so the form stays
+              fast and above the fold. Sized container → no layout shift. */}
+          <div className="hidden lg:block">
+            <div className="relative h-full min-h-[440px] overflow-hidden rounded-card shadow-card">
+              {/* Real installation photo. NOTE: public/installations/*.jpg are
+                  placeholder graphics, so we use the hero photo here (per brief). */}
+              <Image
+                src="/hero/hero-solar-installation.png"
+                alt="Rooftop solar panel installation by Quadbiz in Madurai, Tamil Nadu"
+                fill
+                loading="lazy"
+                sizes="(min-width: 1024px) 42vw, 0px"
+                className="object-cover"
+              />
+            </div>
+          </div>
         </div>
       </Section>
     </>
