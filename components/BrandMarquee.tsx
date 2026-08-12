@@ -12,12 +12,14 @@
  */
 
 const brands = [
-  { name: "Adani", logo: "/brands/adani.svg" },
-  { name: "Waaree", logo: "/brands/waaree.svg" },
-  { name: "Vikram Solar", logo: "/brands/vikram-solar.svg" },
+  { name: "Adani", logo: "/brands/adani.jpg" },
+  { name: "Waaree", logo: "/brands/waaree.png" },
+  // TODO: re-add once a transparent-background logo is supplied (the old JPEG had
+  // a solid black box that looked wrong on the white row):
+  // { name: "Vikram Solar", logo: "/brands/vikram-solar.png" },
   { name: "Goodwe", logo: "/brands/goodwe.svg" },
   { name: "Sungrow", logo: "/brands/sungrow.svg" },
-  { name: "Polycab", logo: "/brands/polycab.svg" },
+  { name: "Polycab", logo: "/brands/polycab.png" },
 ];
 
 function LogoSet({ clone = false }: { clone?: boolean }) {
