@@ -13,6 +13,8 @@ import {
   FileText,
   Wrench,
   Zap,
+  Phone,
+  BadgeCheck,
 } from "lucide-react";
 
 import BrandMarquee from "@/components/BrandMarquee";
@@ -23,9 +25,8 @@ import Reveal from "@/components/motion/Reveal";
 import { RevealGroup, RevealItem } from "@/components/motion/RevealGroup";
 import Section from "@/components/Section";
 import StatsStrip from "@/components/StatsStrip";
-import TrustBar from "@/components/TrustBar";
-import Reviews from "@/components/home/Reviews";
-import { SITE_URL, absoluteUrl, site, whatsappUrl } from "@/lib/site";
+import ReviewsSection from "@/components/ReviewsSection";
+import { SITE_URL, absoluteUrl, site, telHref } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: { absolute: "Solar Company in Madurai | Quadbiz Solar Solutions" },
@@ -122,73 +123,75 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- */}
       {/* Section 1 — Hero */}
       {/* ---------------------------------------------------------------- */}
-      <section className="relative isolate overflow-hidden bg-white">
-        {/* Full-bleed hero photo — the LCP element, so it loads eagerly (priority)
-            and is never lazy-loaded. next/image serves an optimized AVIF/WebP. */}
+      <section className="relative isolate flex min-h-[560px] items-center overflow-hidden bg-navy md:min-h-[640px]">
+        {/* Full-bleed hero photo — the LCP element, eager (priority), object-cover.
+            Crop biased toward the roof so the text column sits over darker pixels.
+            next/image serves an optimized AVIF/WebP. */}
         <Image
           src="/hero/hero-solar-installation.png"
-          alt="Quadbiz solar panel installation on a rooftop in Madurai"
+          alt="Solar panel installation on a rooftop in Madurai by Quadbiz"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[50%_62%]"
+          className="object-cover object-[50%_88%]"
         />
-        {/* Readability scrim: strong white behind the centred text column, fading
-            to transparent at the edges so the photo still reads there. */}
+        {/* Directional dark overlay: strong on the left behind the text, fading
+            right so the panels/house stay visible. */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(130% 95% at 50% 44%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.78) 42%, rgba(255,255,255,0.35) 78%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(90deg, rgba(0,0,0,0.86) 0%, rgba(0,0,0,0.68) 45%, rgba(0,0,0,0.34) 70%, rgba(0,0,0,0.08) 100%)",
           }}
         />
-        {/* Slight overall veil — strengthened on mobile where text sits tighter. */}
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/30 sm:bg-white/15" />
-        {/* Signature sun glow, layered above the photo for warmth (static). */}
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-sun-glow" />
-        <div className="relative z-10 mx-auto w-full max-w-container px-4 pb-12 pt-24 text-center sm:px-6 md:pb-16 md:pt-32 lg:px-8">
-          <p className="text-sm font-medium uppercase tracking-[0.14em] text-orange">
-            MNRE Registered · Serving All of Tamil Nadu
-          </p>
-          <h1 className="mx-auto mt-5 max-w-4xl text-h1 text-navy">
-            Solar Power for Homes, Businesses &amp; Farms in <span className="text-orange">Madurai</span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-body text-grey">
-            Quadbiz Solar Solutions handles everything under one roof — from paperwork and subsidy
-            approvals to civil work and installation. Quality panels, competitive pricing, and local
-            service you can trust.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-            <Link href="/contact" className="btn-primary">
-              Get Free Quote
-            </Link>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary">
-              WhatsApp Us
-            </a>
+        {/* Overall darken — much stronger on mobile (full-width text) so every hero
+            string keeps AA contrast; light on desktop where the gradient carries it. */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-black/60 sm:bg-black/14" />
+
+        <div className="relative z-10 mx-auto w-full max-w-container px-4 py-20 sm:px-6 md:py-28 lg:px-8">
+          <div className="max-w-2xl">
+            {/*
+              SAVINGS-CLAIM NOTE: "up to 90%" is a bold savings claim — confirm it
+              is defensible (real customer data / a typical commercial case) before
+              publishing; otherwise soften (e.g. "significantly cut your bills").
+            */}
+            <h1 className="text-h1 font-semibold text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.55)]">
+              Solar Panel Installation in Madurai —{" "}
+              <span className="text-glow">Cut Your Electricity Bills by up to 90%</span>
+            </h1>
+            <p className="mt-5 max-w-xl text-lg font-medium text-white [text-shadow:0_1px_12px_rgba(0,0,0,0.6)]">
+              Free site survey in Madurai · MNRE assistance · 25-year panel warranty
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a href={telHref} className="btn-primary">
+                <Phone className="h-5 w-5" aria-hidden="true" />
+                Call Now
+              </a>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-full border border-white/70 px-7 py-3 font-medium text-white transition-colors duration-200 hover:bg-white/10"
+              >
+                Get Free Quote
+              </Link>
+            </div>
+
+            <ul className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.6)]">
+              <li className="inline-flex items-center gap-2">
+                <BadgeCheck className="h-5 w-5 flex-shrink-0 text-glow" aria-hidden="true" />
+                MNRE Registered
+              </li>
+              <li className="inline-flex items-center gap-2">
+                <ShieldCheck className="h-5 w-5 flex-shrink-0 text-glow" aria-hidden="true" />
+                25-Year Warranty
+              </li>
+              <li className="inline-flex items-center gap-2">
+                <MapPin className="h-5 w-5 flex-shrink-0 text-glow" aria-hidden="true" />
+                Headquartered: Madurai, TN
+              </li>
+            </ul>
           </div>
-
-          {/* Quiet stats row — opaque hairline card, readable over the hero photo. */}
-          <dl className="mx-auto mt-14 grid max-w-xl grid-cols-3 gap-4 rounded-2xl border border-line bg-white px-6 py-5 shadow-card">
-            {[
-              { value: "15+", label: "Installations" },
-              { value: "50 kW+", label: "Installed" },
-              { value: "25-Yr", label: "Panel Warranty" },
-            ].map((item) => (
-              <div key={item.label} className="text-center">
-                <dt className="sr-only">{item.label}</dt>
-                <dd>
-                  <span className="block text-2xl font-semibold tracking-[-0.03em] text-navy sm:text-3xl">
-                    {item.value}
-                  </span>
-                  <span className="mt-1 block text-xs text-grey">{item.label}</span>
-                </dd>
-              </div>
-            ))}
-          </dl>
-
-          {/* Trust chips — last element of the hero, frosted over the photo. */}
-          <TrustBar className="mt-10 sm:mt-12" />
         </div>
       </section>
 
@@ -311,7 +314,7 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- */}
       {/* Section 8 — Reviews (renders null until Google Places is wired) */}
       {/* ---------------------------------------------------------------- */}
-      <Reviews />
+      <ReviewsSection />
 
       {/* ---------------------------------------------------------------- */}
       {/* Section 9 — Lead form */}

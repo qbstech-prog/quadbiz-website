@@ -8,7 +8,7 @@ import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/motion/Reveal";
 import RevealImage from "@/components/motion/RevealImage";
 import Section from "@/components/Section";
-import Reviews from "@/components/home/Reviews";
+import ReviewsSection from "@/components/ReviewsSection";
 import { breadcrumbSchema } from "@/lib/schema";
 import { SITE_URL, absoluteUrl, site, telHref, whatsappUrl } from "@/lib/site";
 import { installationImages } from "@/lib/content/projects";
@@ -134,7 +134,7 @@ export default function ContactLandingPage() {
       )}
 
       {/* 5. Reviews — reused server component; hidden until Google Places is wired */}
-      <Reviews />
+      <ReviewsSection />
 
       {/* 6. Contact details + map (information, not navigation) */}
       <Section variant="soft">

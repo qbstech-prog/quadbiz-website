@@ -54,6 +54,41 @@ export function localBusinessSchema(): JsonLd {
   };
 }
 
+/**
+ * AggregateRating + Review nodes, merged onto the LocalBusiness by shared @id.
+ * ONLY emit this from real fetched Google data — never from sample/placeholder
+ * reviews. Gated by the caller (ReviewsSection) on `!isSample`.
+ */
+export function reviewsSchema(input: {
+  ratingValue: number;
+  reviewCount: number;
+  reviews: { author: string; rating: number; text: string }[];
+}): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SolarEnergyContractor",
+    "@id": BUSINESS_ID,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: input.ratingValue,
+      reviewCount: input.reviewCount,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    review: input.reviews.map((r) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: r.author },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: r.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      reviewBody: r.text,
+    })),
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Per-page helpers (used from later steps)
 // ---------------------------------------------------------------------------
